@@ -32,7 +32,7 @@ import quanlydakl.BangGiaoVien;
  *
  * @author Admin
  */
-public class LoginFrame2 extends javax.swing.JFrame {
+public class LoginFrame extends javax.swing.JFrame {
 
     int xx;
     int yy;
@@ -64,11 +64,11 @@ public class LoginFrame2 extends javax.swing.JFrame {
     }
 
     /**
-     * Creates new form LoginFrame2
+     * Creates new form LoginFrame
      */
     private TaiKhoan taiKhoan;
     private NguoiDung nguoiDung;
-    public LoginFrame2() {
+    public LoginFrame() {
         initComponents();
         // ngay từ lúc đầu đã load tất cả giáo viên rồi
         // nó không cho phép sao chép dữ liệu giống nhau vào bảng nhé
@@ -108,7 +108,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
 //            }
 //            
 //        } catch (SQLException ex) {
-//            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
 //    private void DeleteAllGiangVien(){
@@ -128,7 +128,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
 //                InsertTeachertoLogin();
 //            }
 //        } catch (SQLException ex) {
-//            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+//            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
 //        }
 //    }
     @SuppressWarnings("unchecked")
@@ -402,7 +402,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
             try {
                 dangNhap();
             } catch (SQLException ex) {
-                Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_matKhauTFKeyPressed
@@ -412,7 +412,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
             try {
                 dangNhap();
             } catch (SQLException ex) {
-                Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
     }//GEN-LAST:event_tenTaiKhoanTFKeyPressed
@@ -426,7 +426,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
 //            try {
 //                dangNhap();
 //            } catch (SQLException ex) {
-//                Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+//                Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
 //            }
 //        }
     }//GEN-LAST:event_dangNhapBTNKeyPressed
@@ -435,7 +435,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
         try {
             dangNhap();
         } catch (SQLException ex) {
-            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_dangNhapBTNActionPerformed
     
@@ -476,7 +476,7 @@ public class LoginFrame2 extends javax.swing.JFrame {
                 this.dispose();
             }
         } catch (SQLException ex) {
-            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(LoginFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
         
     }

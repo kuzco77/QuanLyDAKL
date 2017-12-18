@@ -2,11 +2,11 @@
 package quanlydakl;
 
 
-import view.LoginFrame2;
+import view.LoginFrame;
 public class QuanLyDAKL {
     
     public static void main(String[] args) {
-        LoginFrame2 L = new LoginFrame2();
+        LoginFrame L = new LoginFrame();
         L.setVisible(true);
             
     }

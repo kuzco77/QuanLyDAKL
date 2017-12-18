@@ -1215,7 +1215,7 @@ public class Main extends javax.swing.JFrame {
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);
-    LoginFrame2 login = new LoginFrame2();
+    LoginFrame login = new LoginFrame();
     login.setVisible(true);
     }
     
