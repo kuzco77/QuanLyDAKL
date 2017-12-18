@@ -52,14 +52,18 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
         initComponents();
         setLocationRelativeTo(null);
         
-        
         setTitle("Phân công đồ án- khối lượng môn học cho lớp");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         fillcombox(Banghocphan, MaHocphan, jComboBox_mahocphan);
-        fillcombox(Banggiangvien, MaGiangvien, jComboBox_Magiangvien);
+        fillcombox(Banggiangvien, MaGiangvien, maGiangVienCb);
         fillcombox(Bangloaihinh, MaLoaiHinh, jComboBox_Maloaihinh);
 //        showtt_PCHD_totable();
+
+        if (!maGiangVien.equals("admin")) {
+            this.maGiangVien = maGiangVien;
+            maGiangVienCb.setEditable(false);
+        }
         updateTable();
     }
 
@@ -173,7 +177,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
         jTextField_Hocki = new javax.swing.JTextField();
         jComboBox_Maloaihinh = new javax.swing.JComboBox<>();
         jComboBox_mahocphan = new javax.swing.JComboBox<>();
-        jComboBox_Magiangvien = new javax.swing.JComboBox<>();
+        maGiangVienCb = new javax.swing.JComboBox<>();
         jDateChooser_BatDau = new com.toedter.calendar.JDateChooser();
         jDateChooser_KetThuc = new com.toedter.calendar.JDateChooser();
         jButton1 = new javax.swing.JButton();
@@ -216,7 +220,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
         jLabel5.setText("Mã học phần:");
 
         jLabel6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jLabel6.setText("Mã giáo viên:");
+        jLabel6.setText("Mã giảng viên:");
 
         jLabel7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel7.setText("Bắt đầu:");
@@ -235,7 +239,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
 
         jComboBox_mahocphan.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NONE" }));
 
-        jComboBox_Magiangvien.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NONE" }));
+        maGiangVienCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NONE" }));
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -266,7 +270,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                 .addGap(68, 68, 68)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(jComboBox_mahocphan, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jComboBox_Magiangvien, 0, 309, Short.MAX_VALUE)
+                    .addComponent(maGiangVienCb, 0, 309, Short.MAX_VALUE)
                     .addComponent(jDateChooser_BatDau, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(jDateChooser_KetThuc, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(34, Short.MAX_VALUE))
@@ -289,7 +293,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jLabel6)
                     .addComponent(jComboBox_Maloaihinh, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jComboBox_Magiangvien, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(maGiangVienCb, javax.swing.GroupLayout.PREFERRED_SIZE, 31, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
@@ -376,7 +380,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1074, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(20, Short.MAX_VALUE))
+                .addContainerGap(12, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(xemChiTietPhanCongBtn)
@@ -432,7 +436,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                 + "`maLoaiHinh`='"+jComboBox_Maloaihinh.getSelectedItem().toString()+"', "
                 + "`hocKy`='"+jTextField_Hocki.getText()+"', "
                 + "`maHocPhan`='"+jComboBox_mahocphan.getSelectedItem().toString()+"',"
-                + " `maGiangVien`='"+jComboBox_Magiangvien.getSelectedItem().toString()+"',"
+                + " `maGiangVien`='"+maGiangVienCb.getSelectedItem().toString()+"',"
                 + " `batDau`='"+sqlBatDau+"',"
                 + " `ketThuc`='"+sqlKethuc+"'"
                 + " WHERE `maLop`='"+maLopTf.getText()+"'";
@@ -450,7 +454,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                 + " '"+jComboBox_Maloaihinh.getSelectedItem().toString()+"', "
                 + " '"+jTextField_Hocki.getText()+"'"
                 + ", '"+jComboBox_mahocphan.getSelectedItem().toString()+"'"
-                + ", '"+jComboBox_Magiangvien.getSelectedItem().toString()+"', "
+                + ", '"+maGiangVienCb.getSelectedItem().toString()+"', "
                 + "'"+sqlBatDau+"', "
                 + "'"+sqlKethuc+"');";
         executeSQLquery(query, "Inserted ");
@@ -477,7 +481,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
         jComboBox_Maloaihinh.setSelectedItem(model.getValueAt(i, 1).toString());
         jTextField_Hocki.setText(model.getValueAt(i, 2).toString());
         jComboBox_mahocphan.setSelectedItem(model.getValueAt(i, 3).toString());
-        jComboBox_Magiangvien.setSelectedItem(model.getValueAt(i, 4).toString());
+        maGiangVienCb.setSelectedItem(model.getValueAt(i, 4).toString());
         jDateChooser_BatDau.setDate(batdau);
         jDateChooser_KetThuc.setDate(kethuc);  
         } catch (ParseException ex) {
@@ -571,8 +575,9 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
     
     private void updateTable() {
         try {
-            String blankQuery = "call timNCPhanCongHuongDan('')";
-            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(blankQuery, "phan cong huong dan");
+            String blankQuery = "call timNCPhanCongHuongDan('%s')";
+            String sqlQuery = String.format(blankQuery, maGiangVien);
+            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "phan cong huong dan");
             phanCongTable.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(InfoAssignmentForClass.class.getName()).log(Level.SEVERE, null, ex);
@@ -586,7 +591,6 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
-    private javax.swing.JComboBox<String> jComboBox_Magiangvien;
     private javax.swing.JComboBox<String> jComboBox_Maloaihinh;
     private javax.swing.JComboBox<String> jComboBox_mahocphan;
     private com.toedter.calendar.JDateChooser jDateChooser_BatDau;
@@ -605,6 +609,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
     private javax.swing.JTextField jTextField_Hocki;
+    private javax.swing.JComboBox<String> maGiangVienCb;
     private javax.swing.JTextField maLopTf;
     private javax.swing.JTable phanCongTable;
     private javax.swing.JButton xemChiTietPhanCongBtn;

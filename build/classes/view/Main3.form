@@ -349,7 +349,7 @@
                                       <Component id="troGiupMENU" min="-2" pref="170" max="-2" attributes="0"/>
                                   </Group>
                                   <Component id="quanLyMENU" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                  <Component id="thongTinMENU2" min="-2" pref="184" max="-2" attributes="0"/>
+                                  <Component id="chamDiemBtn" min="-2" pref="184" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
@@ -373,7 +373,7 @@
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="thongTinMENU2" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="chamDiemBtn" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
@@ -569,7 +569,7 @@
                         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="troGiupMENUMouseExited"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="thongTinMENU2">
+                    <Component class="javax.swing.JLabel" name="chamDiemBtn">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="14" style="0"/>
@@ -578,14 +578,15 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/checkbox-resize.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="&#x110;&#x1ed3; &#xe1;n"/>
+                        <Property name="text" type="java.lang.String" value="Ch&#x1ea5;m &#x111;i&#x1ec3;m"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                         <Property name="iconTextGap" type="int" value="15"/>
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="thongTinMENU2MouseMoved"/>
-                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="thongTinMENU2MouseExited"/>
+                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseMoved"/>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseClicked"/>
+                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseExited"/>
                       </Events>
                     </Component>
                   </SubComponents>

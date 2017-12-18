@@ -123,7 +123,7 @@ private static final String TEST = "test";
         phanCongMENU = new javax.swing.JLabel();
         thongTinMENU = new javax.swing.JLabel();
         troGiupMENU = new javax.swing.JLabel();
-        thongTinMENU2 = new javax.swing.JLabel();
+        chamDiemBtn = new javax.swing.JLabel();
         theTaiKhoan = new javax.swing.JPanel();
         dangXuatMENUITEM = new javax.swing.JLabel();
         doiMatKhauMENUITEM = new javax.swing.JLabel();
@@ -453,21 +453,24 @@ private static final String TEST = "test";
             }
         });
 
-        thongTinMENU2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        thongTinMENU2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        thongTinMENU2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checkbox-resize.png"))); // NOI18N
-        thongTinMENU2.setText("Đồ án");
-        thongTinMENU2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        thongTinMENU2.setIconTextGap(15);
-        thongTinMENU2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        thongTinMENU2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        chamDiemBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        chamDiemBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        chamDiemBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checkbox-resize.png"))); // NOI18N
+        chamDiemBtn.setText("Chấm điểm");
+        chamDiemBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        chamDiemBtn.setIconTextGap(15);
+        chamDiemBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        chamDiemBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                thongTinMENU2MouseMoved(evt);
+                chamDiemBtnMouseMoved(evt);
             }
         });
-        thongTinMENU2.addMouseListener(new java.awt.event.MouseAdapter() {
+        chamDiemBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                chamDiemBtnMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                thongTinMENU2MouseExited(evt);
+                chamDiemBtnMouseExited(evt);
             }
         });
 
@@ -502,7 +505,7 @@ private static final String TEST = "test";
                         .addGap(176, 176, 176)
                         .addComponent(troGiupMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(quanLyMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(thongTinMENU2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(chamDiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(14, 14, 14))
         );
         theChucNangChinhLayout.setVerticalGroup(
@@ -520,7 +523,7 @@ private static final String TEST = "test";
                             .addComponent(baoCaoMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, theChucNangChinhLayout.createSequentialGroup()
-                        .addComponent(thongTinMENU2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(chamDiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(theChucNangChinhLayout.createSequentialGroup()
@@ -1202,13 +1205,13 @@ private static final String TEST = "test";
         // TODO add your handling code here:
     }//GEN-LAST:event_thongTinMENU1MouseExited
 
-    private void thongTinMENU2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinMENU2MouseMoved
+    private void chamDiemBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseMoved
         // TODO add your handling code here:
-    }//GEN-LAST:event_thongTinMENU2MouseMoved
+    }//GEN-LAST:event_chamDiemBtnMouseMoved
 
-    private void thongTinMENU2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinMENU2MouseExited
+    private void chamDiemBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseExited
         // TODO add your handling code here:
-    }//GEN-LAST:event_thongTinMENU2MouseExited
+    }//GEN-LAST:event_chamDiemBtnMouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         this.dispose();
@@ -1227,6 +1230,11 @@ private static final String TEST = "test";
         ReportFrame frame = new ReportFrame();
         frame.setVisible(true);
     }//GEN-LAST:event_baoCaoMENUMouseClicked
+
+    private void chamDiemBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseClicked
+        InfoAssignmentForClass frame = new InfoAssignmentForClass(maNguoiDung);
+        frame.setVisible(true);
+    }//GEN-LAST:event_chamDiemBtnMouseClicked
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);
@@ -1265,6 +1273,7 @@ private static final String TEST = "test";
     private javax.swing.JLabel backLB;
     private javax.swing.JLabel baoCaoMENU;
     private javax.swing.JLabel caiDatMENU;
+    private javax.swing.JLabel chamDiemBtn;
     private javax.swing.JLabel closeLB;
     private javax.swing.JLabel dangXuatMENUITEM;
     private javax.swing.JLabel doiMatKhauMENUITEM;
@@ -1306,7 +1315,6 @@ private static final String TEST = "test";
     private javax.swing.JLabel thongKeMENU;
     private javax.swing.JLabel thongTinMENU;
     private javax.swing.JLabel thongTinMENU1;
-    private javax.swing.JLabel thongTinMENU2;
     private javax.swing.JLabel thongTinTaiKhoanMENUITEM;
     private javax.swing.JLabel timKiemMENU;
     private javax.swing.JButton timKiemSinhVienBtn;
