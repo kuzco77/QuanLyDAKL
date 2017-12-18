@@ -5,12 +5,19 @@
  */
 package view;
 
+import PDF.PDFF;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.SQLException;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
+import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
 
 /**
@@ -40,6 +47,8 @@ public class SearchStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -57,8 +66,25 @@ public class SearchStudent extends javax.swing.JFrame {
         khoaTF = new javax.swing.JTextField();
         huyBtn = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTable1 = new javax.swing.JTable();
+        sinhVienTable = new javax.swing.JTable();
         timKiemBtn = new javax.swing.JButton();
+        jButton1 = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 255, 255));
@@ -151,26 +177,26 @@ public class SearchStudent extends javax.swing.JFrame {
                     .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(maSinhVienTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(36, 36, 36)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(hoVaTenTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(queQuanTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(32, 32, 32)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7)
                     .addComponent(khoaTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(37, Short.MAX_VALUE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        huyBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        huyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/cancel_ic.png"))); // NOI18N
+        huyBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        huyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-resize.png"))); // NOI18N
         huyBtn.setText("Hủy");
 
-        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+        sinhVienTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null, null, null, null, null, null, null},
                 {null, null, null, null, null, null, null, null, null, null},
@@ -187,14 +213,22 @@ public class SearchStudent extends javax.swing.JFrame {
                 "MSSV", "Họ và Tên", "Ngày sinh", "Giới tính", "Lớp", "Mã lớp", "Khóa", "Email", "Điện thoại", "Quê quán"
             }
         ));
-        jScrollPane1.setViewportView(jTable1);
+        jScrollPane1.setViewportView(sinhVienTable);
 
-        timKiemBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        timKiemBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/search_icon.png"))); // NOI18N
+        timKiemBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        timKiemBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-search-resize.png"))); // NOI18N
         timKiemBtn.setText("Tìm kiếm");
         timKiemBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 timKiemBtnActionPerformed(evt);
+            }
+        });
+
+        jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton1.setText("Xuất báo cáo");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
             }
         });
 
@@ -203,15 +237,18 @@ public class SearchStudent extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 883, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(143, 143, 143)
+                        .addComponent(timKiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(168, 168, 168)
+                        .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(129, 129, 129)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(27, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(143, 143, 143)
-                .addComponent(timKiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 226, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 201, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(140, 140, 140))
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
@@ -221,18 +258,20 @@ public class SearchStudent extends javax.swing.JFrame {
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(300, Short.MAX_VALUE)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(timKiemBtn)
-                    .addComponent(huyBtn))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 185, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(224, Short.MAX_VALUE)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(timKiemBtn, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(huyBtn)
+                        .addComponent(jButton1)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 213, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(layout.createSequentialGroup()
                     .addContainerGap()
                     .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(261, Short.MAX_VALUE)))
+                    .addContainerGap(269, Short.MAX_VALUE)))
         );
 
         pack();
@@ -252,11 +291,16 @@ public class SearchStudent extends javax.swing.JFrame {
                 khoaTF.getText(),
                 queQuanTF.getText());
         try {
-            ServiceModel.getTableModelFromSQLQuery(sqlQuery, "tim kiem sinh vien");
+            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "tim kiem sinh vien");
+            sinhVienTable.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(SearchStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_timKiemBtnActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        infileTest();
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -292,11 +336,54 @@ public class SearchStudent extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void updateTable() {
+        try {
+            String blankQuery = "call timNCHocPhan('')";
+            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(blankQuery, "phan cong huong dan");
+            sinhVienTable.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoAssignmentForClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void infileTest() {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = "Tìm kiếm sinh viên";
+        PDFF.makePDF(file, target, ngaythangnam, sinhVienTable);
+        openOnFly(file);
+    }
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField gioiTinhTF;
     private javax.swing.JTextField hoVaTenTF;
     private javax.swing.JButton huyBtn;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -307,11 +394,11 @@ public class SearchStudent extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable1;
     private javax.swing.JTextField khoaTF;
     private javax.swing.JTextField lopTF;
     private javax.swing.JTextField maSinhVienTF;
     private javax.swing.JTextField queQuanTF;
+    private javax.swing.JTable sinhVienTable;
     private javax.swing.JButton timKiemBtn;
     // End of variables declaration//GEN-END:variables
 }

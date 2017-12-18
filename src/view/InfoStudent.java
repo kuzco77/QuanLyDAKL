@@ -599,7 +599,7 @@ public class InfoStudent extends javax.swing.JFrame {
         int month = ld.getMonthValue();
         int year = ld.getYear();
         String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
-        String target = "Thông tin sách";
+        String target = "Danh sách sinh viên";
         PDFF.makePDF(file, target, ngaythangnam, sinhVienTable);
         openOnFly(file);
     }

@@ -122,8 +122,7 @@ private static final String TEST = "test";
         thongKeMENU = new javax.swing.JLabel();
         phanCongMENU = new javax.swing.JLabel();
         thongTinMENU = new javax.swing.JLabel();
-        troGiupMENU = new javax.swing.JLabel();
-        chamDiemBtn = new javax.swing.JLabel();
+        thongTinMENU2 = new javax.swing.JLabel();
         theTaiKhoan = new javax.swing.JPanel();
         dangXuatMENUITEM = new javax.swing.JLabel();
         doiMatKhauMENUITEM = new javax.swing.JLabel();
@@ -435,42 +434,21 @@ private static final String TEST = "test";
             }
         });
 
-        troGiupMENU.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        troGiupMENU.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        troGiupMENU.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8_Help_72px_1.png"))); // NOI18N
-        troGiupMENU.setText("Trợ giúp");
-        troGiupMENU.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        troGiupMENU.setIconTextGap(15);
-        troGiupMENU.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        troGiupMENU.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+        thongTinMENU2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
+        thongTinMENU2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        thongTinMENU2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checkbox-resize.png"))); // NOI18N
+        thongTinMENU2.setText("Đồ án");
+        thongTinMENU2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        thongTinMENU2.setIconTextGap(15);
+        thongTinMENU2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        thongTinMENU2.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
             public void mouseMoved(java.awt.event.MouseEvent evt) {
-                troGiupMENUMouseMoved(evt);
+                thongTinMENU2MouseMoved(evt);
             }
         });
-        troGiupMENU.addMouseListener(new java.awt.event.MouseAdapter() {
+        thongTinMENU2.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseExited(java.awt.event.MouseEvent evt) {
-                troGiupMENUMouseExited(evt);
-            }
-        });
-
-        chamDiemBtn.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
-        chamDiemBtn.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        chamDiemBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checkbox-resize.png"))); // NOI18N
-        chamDiemBtn.setText("Chấm điểm");
-        chamDiemBtn.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        chamDiemBtn.setIconTextGap(15);
-        chamDiemBtn.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
-        chamDiemBtn.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
-                chamDiemBtnMouseMoved(evt);
-            }
-        });
-        chamDiemBtn.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chamDiemBtnMouseClicked(evt);
-            }
-            public void mouseExited(java.awt.event.MouseEvent evt) {
-                chamDiemBtnMouseExited(evt);
+                thongTinMENU2MouseExited(evt);
             }
         });
 
@@ -481,7 +459,6 @@ private static final String TEST = "test";
             .addGroup(theChucNangChinhLayout.createSequentialGroup()
                 .addGap(0, 0, 0)
                 .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(taiKhoanMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(theChucNangChinhLayout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -491,22 +468,20 @@ private static final String TEST = "test";
                                 .addComponent(thongTinMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(theChucNangChinhLayout.createSequentialGroup()
                                 .addComponent(baoCaoMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(theChucNangChinhLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                                        .addComponent(timKiemMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGap(9, 9, 9))
-                                    .addGroup(theChucNangChinhLayout.createSequentialGroup()
-                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                        .addComponent(thongKeMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(caiDatMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(thongKeMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(thongTinMENU2, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(quanLyMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addContainerGap(196, Short.MAX_VALUE))
                     .addGroup(theChucNangChinhLayout.createSequentialGroup()
-                        .addGap(176, 176, 176)
-                        .addComponent(troGiupMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(quanLyMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 178, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(chamDiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(14, 14, 14))
+                        .addComponent(taiKhoanMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(timKiemMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(caiDatMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))))
         );
         theChucNangChinhLayout.setVerticalGroup(
             theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -523,15 +498,13 @@ private static final String TEST = "test";
                             .addComponent(baoCaoMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(6, 6, 6))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, theChucNangChinhLayout.createSequentialGroup()
-                        .addComponent(chamDiemBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(thongTinMENU2, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)))
                 .addGroup(theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(theChucNangChinhLayout.createSequentialGroup()
-                        .addComponent(quanLyMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(24, 24, 24)
-                        .addComponent(troGiupMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(quanLyMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(thongTinMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(phanCongMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(phanCongMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(629, Short.MAX_VALUE))
         );
 
         CardMenu.add(theChucNangChinh, "menu card");
@@ -615,7 +588,7 @@ private static final String TEST = "test";
                     .addGroup(theTaiKhoanLayout.createSequentialGroup()
                         .addGap(182, 182, 182)
                         .addComponent(dangXuatMENUITEM, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(230, Short.MAX_VALUE))
+                .addContainerGap(250, Short.MAX_VALUE))
         );
         theTaiKhoanLayout.setVerticalGroup(
             theTaiKhoanLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,7 +613,7 @@ private static final String TEST = "test";
         testLayout.setHorizontalGroup(
             testLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, testLayout.createSequentialGroup()
-                .addContainerGap(421, Short.MAX_VALUE)
+                .addContainerGap(441, Short.MAX_VALUE)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(227, 227, 227))
         );
@@ -663,7 +636,7 @@ private static final String TEST = "test";
             }
         });
 
-        jButton3.setText("AssignmentForClass");
+        jButton3.setText("Tìm kiếm phân công");
 
         jButton4.setText("Tìm kiếm giảng viên");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -695,7 +668,7 @@ private static final String TEST = "test";
                     .addComponent(jButton3, javax.swing.GroupLayout.DEFAULT_SIZE, 220, Short.MAX_VALUE)
                     .addComponent(jButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(timKiemSinhVienBtn, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(361, Short.MAX_VALUE))
+                .addContainerGap(381, Short.MAX_VALUE))
         );
         TimkiemLayout.setVerticalGroup(
             TimkiemLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -821,12 +794,12 @@ private static final String TEST = "test";
                                         .addComponent(quanLyHocPhan8, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(jLabel20, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
                                         .addComponent(quanLyHocPhan7, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(232, Short.MAX_VALUE))
             .addGroup(theQuanLy2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(theQuanLy2Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
                     .addComponent(jLabel24, javax.swing.GroupLayout.PREFERRED_SIZE, 227, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(481, Short.MAX_VALUE)))
+                    .addContainerGap(501, Short.MAX_VALUE)))
         );
         theQuanLy2Layout.setVerticalGroup(
             theQuanLy2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1119,14 +1092,6 @@ private static final String TEST = "test";
         MENUCard.show(CardMenu, MENUMAIN);
     }//GEN-LAST:event_backLBMouseClicked
 
-    private void troGiupMENUMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_troGiupMENUMouseMoved
-        setBorderMENU(troGiupMENU, 1);
-    }//GEN-LAST:event_troGiupMENUMouseMoved
-
-    private void troGiupMENUMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_troGiupMENUMouseExited
-        setBorderMENU(troGiupMENU, 0);
-    }//GEN-LAST:event_troGiupMENUMouseExited
-
     private void formWindowClosed(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosed
         dangXuat();
     }//GEN-LAST:event_formWindowClosed
@@ -1151,7 +1116,7 @@ private static final String TEST = "test";
     }//GEN-LAST:event_quanLySinhVienActionPerformed
 
     private void quanLyHocPhan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quanLyHocPhan2ActionPerformed
-        InfoType frame = new InfoType();
+        InfoSubject frame = new InfoSubject();
         frame.setVisible(true);
     }//GEN-LAST:event_quanLyHocPhan2ActionPerformed
 
@@ -1205,13 +1170,13 @@ private static final String TEST = "test";
         // TODO add your handling code here:
     }//GEN-LAST:event_thongTinMENU1MouseExited
 
-    private void chamDiemBtnMouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseMoved
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chamDiemBtnMouseMoved
+    private void thongTinMENU2MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinMENU2MouseMoved
+        setBorderMENU(thongTinMENU2, 1);
+    }//GEN-LAST:event_thongTinMENU2MouseMoved
 
-    private void chamDiemBtnMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseExited
-        // TODO add your handling code here:
-    }//GEN-LAST:event_chamDiemBtnMouseExited
+    private void thongTinMENU2MouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinMENU2MouseExited
+        setBorderMENU(thongTinMENU2, 0);
+    }//GEN-LAST:event_thongTinMENU2MouseExited
 
     private void jLabel6MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel6MouseClicked
         this.dispose();
@@ -1230,11 +1195,6 @@ private static final String TEST = "test";
         ReportFrame frame = new ReportFrame();
         frame.setVisible(true);
     }//GEN-LAST:event_baoCaoMENUMouseClicked
-
-    private void chamDiemBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chamDiemBtnMouseClicked
-        InfoAssignmentForClass frame = new InfoAssignmentForClass(maNguoiDung);
-        frame.setVisible(true);
-    }//GEN-LAST:event_chamDiemBtnMouseClicked
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);
@@ -1273,7 +1233,6 @@ private static final String TEST = "test";
     private javax.swing.JLabel backLB;
     private javax.swing.JLabel baoCaoMENU;
     private javax.swing.JLabel caiDatMENU;
-    private javax.swing.JLabel chamDiemBtn;
     private javax.swing.JLabel closeLB;
     private javax.swing.JLabel dangXuatMENUITEM;
     private javax.swing.JLabel doiMatKhauMENUITEM;
@@ -1315,9 +1274,9 @@ private static final String TEST = "test";
     private javax.swing.JLabel thongKeMENU;
     private javax.swing.JLabel thongTinMENU;
     private javax.swing.JLabel thongTinMENU1;
+    private javax.swing.JLabel thongTinMENU2;
     private javax.swing.JLabel thongTinTaiKhoanMENUITEM;
     private javax.swing.JLabel timKiemMENU;
     private javax.swing.JButton timKiemSinhVienBtn;
-    private javax.swing.JLabel troGiupMENU;
     // End of variables declaration//GEN-END:variables
 }

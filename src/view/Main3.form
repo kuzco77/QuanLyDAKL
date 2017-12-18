@@ -316,7 +316,6 @@
                           <Group type="102" attributes="0">
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="taiKhoanMENU" min="-2" pref="170" max="-2" attributes="0"/>
                                   <Group type="102" alignment="0" attributes="0">
                                       <EmptySpace min="-2" pref="12" max="-2" attributes="0"/>
                                       <Group type="103" groupAlignment="0" attributes="0">
@@ -327,31 +326,26 @@
                                           </Group>
                                           <Group type="102" alignment="0" attributes="0">
                                               <Component id="baoCaoMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                              <Group type="103" groupAlignment="0" attributes="0">
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace pref="17" max="32767" attributes="0"/>
-                                                      <Component id="timKiemMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                                      <EmptySpace min="-2" pref="9" max="-2" attributes="0"/>
-                                                  </Group>
-                                                  <Group type="102" attributes="0">
-                                                      <EmptySpace max="-2" attributes="0"/>
-                                                      <Component id="thongKeMENU" min="-2" pref="178" max="-2" attributes="0"/>
-                                                  </Group>
-                                              </Group>
+                                              <EmptySpace max="-2" attributes="0"/>
+                                              <Component id="thongKeMENU" min="-2" pref="178" max="-2" attributes="0"/>
                                           </Group>
                                       </Group>
+                                      <EmptySpace max="-2" attributes="0"/>
+                                      <Group type="103" groupAlignment="0" attributes="0">
+                                          <Component id="thongTinMENU2" min="-2" pref="184" max="-2" attributes="0"/>
+                                          <Component id="quanLyMENU" min="-2" pref="178" max="-2" attributes="0"/>
+                                      </Group>
+                                      <EmptySpace pref="196" max="32767" attributes="0"/>
+                                  </Group>
+                                  <Group type="102" alignment="0" attributes="0">
+                                      <Component id="taiKhoanMENU" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <EmptySpace type="separate" max="-2" attributes="0"/>
+                                      <Component id="timKiemMENU" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                                      <Component id="caiDatMENU" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
-                              <Group type="103" groupAlignment="0" attributes="0">
-                                  <Component id="caiDatMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                  <Group type="102" attributes="0">
-                                      <EmptySpace min="-2" pref="176" max="-2" attributes="0"/>
-                                      <Component id="troGiupMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                  </Group>
-                                  <Component id="quanLyMENU" alignment="0" min="-2" pref="178" max="-2" attributes="0"/>
-                                  <Component id="chamDiemBtn" min="-2" pref="184" max="-2" attributes="0"/>
-                              </Group>
-                              <EmptySpace min="-2" pref="14" max="-2" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -373,19 +367,16 @@
                                       <EmptySpace min="-2" pref="6" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="1" attributes="0">
-                                      <Component id="chamDiemBtn" min="-2" pref="170" max="-2" attributes="0"/>
+                                      <Component id="thongTinMENU2" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <Group type="103" groupAlignment="0" attributes="0">
-                                  <Group type="102" attributes="0">
-                                      <Component id="quanLyMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <EmptySpace min="-2" pref="24" max="-2" attributes="0"/>
-                                      <Component id="troGiupMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                  </Group>
+                                  <Component id="quanLyMENU" min="-2" pref="170" max="-2" attributes="0"/>
                                   <Component id="thongTinMENU" min="-2" pref="170" max="-2" attributes="0"/>
                                   <Component id="phanCongMENU" min="-2" pref="170" max="-2" attributes="0"/>
                               </Group>
+                              <EmptySpace pref="629" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -550,26 +541,7 @@
                         <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="thongTinMENUMouseExited"/>
                       </Events>
                     </Component>
-                    <Component class="javax.swing.JLabel" name="troGiupMENU">
-                      <Properties>
-                        <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-                          <Font name="Arial" size="14" style="0"/>
-                        </Property>
-                        <Property name="horizontalAlignment" type="int" value="0"/>
-                        <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                          <Image iconType="3" name="/icon/icons8_Help_72px_1.png"/>
-                        </Property>
-                        <Property name="text" type="java.lang.String" value="Tr&#x1ee3; gi&#xfa;p"/>
-                        <Property name="horizontalTextPosition" type="int" value="0"/>
-                        <Property name="iconTextGap" type="int" value="15"/>
-                        <Property name="verticalTextPosition" type="int" value="3"/>
-                      </Properties>
-                      <Events>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="troGiupMENUMouseMoved"/>
-                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="troGiupMENUMouseExited"/>
-                      </Events>
-                    </Component>
-                    <Component class="javax.swing.JLabel" name="chamDiemBtn">
+                    <Component class="javax.swing.JLabel" name="thongTinMENU2">
                       <Properties>
                         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                           <Font name="Arial" size="14" style="0"/>
@@ -578,15 +550,14 @@
                         <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
                           <Image iconType="3" name="/icon/checkbox-resize.png"/>
                         </Property>
-                        <Property name="text" type="java.lang.String" value="Ch&#x1ea5;m &#x111;i&#x1ec3;m"/>
+                        <Property name="text" type="java.lang.String" value="&#x110;&#x1ed3; &#xe1;n"/>
                         <Property name="horizontalTextPosition" type="int" value="0"/>
                         <Property name="iconTextGap" type="int" value="15"/>
                         <Property name="verticalTextPosition" type="int" value="3"/>
                       </Properties>
                       <Events>
-                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseMoved"/>
-                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseClicked"/>
-                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="chamDiemBtnMouseExited"/>
+                        <EventHandler event="mouseMoved" listener="java.awt.event.MouseMotionListener" parameters="java.awt.event.MouseEvent" handler="thongTinMENU2MouseMoved"/>
+                        <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="thongTinMENU2MouseExited"/>
                       </Events>
                     </Component>
                   </SubComponents>
@@ -617,7 +588,7 @@
                                       <Component id="dangXuatMENUITEM" min="-2" pref="170" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="230" max="32767" attributes="0"/>
+                              <EmptySpace pref="250" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -713,7 +684,7 @@
                     <DimensionLayout dim="0">
                       <Group type="103" groupAlignment="0" attributes="0">
                           <Group type="102" alignment="1" attributes="0">
-                              <EmptySpace pref="421" max="32767" attributes="0"/>
+                              <EmptySpace pref="441" max="32767" attributes="0"/>
                               <Component id="jLabel2" min="-2" pref="90" max="-2" attributes="0"/>
                               <EmptySpace min="-2" pref="227" max="-2" attributes="0"/>
                           </Group>
@@ -758,7 +729,7 @@
                                   <Component id="jButton4" max="32767" attributes="0"/>
                                   <Component id="timKiemSinhVienBtn" alignment="0" max="32767" attributes="0"/>
                               </Group>
-                              <EmptySpace pref="361" max="32767" attributes="0"/>
+                              <EmptySpace pref="381" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -789,7 +760,7 @@
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton3">
                       <Properties>
-                        <Property name="text" type="java.lang.String" value="AssignmentForClass"/>
+                        <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ph&#xe2;n c&#xf4;ng"/>
                       </Properties>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton4">
@@ -879,13 +850,13 @@
                                       </Group>
                                   </Group>
                               </Group>
-                              <EmptySpace pref="212" max="32767" attributes="0"/>
+                              <EmptySpace pref="232" max="32767" attributes="0"/>
                           </Group>
                           <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="0" attributes="0">
                                   <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                                   <Component id="jLabel24" min="-2" pref="227" max="-2" attributes="0"/>
-                                  <EmptySpace pref="481" max="32767" attributes="0"/>
+                                  <EmptySpace pref="501" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>

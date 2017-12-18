@@ -5,16 +5,23 @@
  */
 package view;
 
+import PDF.PDFF;
 import static conn.ConnectionToDatabase.getJDBCConnection;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
 import quanlydakl.BangHocPhan;
@@ -107,6 +114,8 @@ public class InfoSubject extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -122,10 +131,26 @@ public class InfoSubject extends javax.swing.JFrame {
         suabtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        inBtn = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         hocPhanTable = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -247,9 +272,14 @@ public class InfoSubject extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
-        jButton5.setText("Xuất báo cáo");
+        inBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        inBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
+        inBtn.setText("Xuất báo cáo");
+        inBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inBtnActionPerformed(evt);
+            }
+        });
 
         jButton6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
@@ -280,7 +310,7 @@ public class InfoSubject extends javax.swing.JFrame {
                 .addContainerGap())
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(inBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(88, 88, 88)
                 .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
@@ -314,7 +344,7 @@ public class InfoSubject extends javax.swing.JFrame {
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton5)
+                    .addComponent(inBtn)
                     .addComponent(jButton6))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -382,6 +412,10 @@ public class InfoSubject extends javax.swing.JFrame {
         Huy();
     }//GEN-LAST:event_jButton4ActionPerformed
 
+    private void inBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inBtnActionPerformed
+        infileTest(hocPhanTable, "Danh sách môn học");
+    }//GEN-LAST:event_inBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -426,13 +460,45 @@ public class InfoSubject extends javax.swing.JFrame {
             Logger.getLogger(InfoAssignmentForClass.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void infileTest(JTable table, String tieuDe) {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = tieuDe;
+        PDFF.makePDF(file, target, ngaythangnam, table); 
+        openOnFly(file);
+    }  
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTable hocPhanTable;
+    private javax.swing.JButton inBtn;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

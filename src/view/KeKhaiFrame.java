@@ -5,16 +5,23 @@
 */
 package view;
 
+import PDF.PDFF;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.text.Normalizer;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.regex.Pattern;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
+import javax.swing.JTable;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Service;
@@ -71,6 +78,8 @@ public class KeKhaiFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel5 = new javax.swing.JPanel();
         tuKyCB = new javax.swing.JComboBox<>();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -81,6 +90,24 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         tenGiangVienCb = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
         capNhatBtn = new javax.swing.JButton();
+        inBtn = new javax.swing.JButton();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -129,6 +156,15 @@ public class KeKhaiFrame extends javax.swing.JFrame {
             }
         });
 
+        inBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        inBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
+        inBtn.setText("Xuất báo cáo");
+        inBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                inBtnActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
         jPanel5Layout.setHorizontalGroup(
@@ -152,6 +188,10 @@ public class KeKhaiFrame extends javax.swing.JFrame {
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel5Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(inBtn)
+                .addGap(20, 20, 20))
         );
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -167,6 +207,8 @@ public class KeKhaiFrame extends javax.swing.JFrame {
                     .addComponent(capNhatBtn))
                 .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(inBtn)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -201,6 +243,10 @@ public class KeKhaiFrame extends javax.swing.JFrame {
     private void denKyCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denKyCbActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_denKyCbActionPerformed
+
+    private void inBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_inBtnActionPerformed
+        infileTest(phanCongTable, "Kê khai");
+    }//GEN-LAST:event_inBtnActionPerformed
     
     /**
      * @param args the command line arguments
@@ -275,9 +321,42 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         return "";
     }
     
+    private void infileTest(JTable table, String tieuDe) {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = tieuDe;
+        PDFF.makePDF(file, target, ngaythangnam, table); 
+        openOnFly(file);
+    }  
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton capNhatBtn;
     private javax.swing.JComboBox<String> denKyCb;
+    private javax.swing.JButton inBtn;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;

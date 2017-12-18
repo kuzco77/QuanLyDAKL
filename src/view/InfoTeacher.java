@@ -562,11 +562,14 @@ public class InfoTeacher extends javax.swing.JFrame {
                 + "'"+boMonTF.getText()+"');";
         executeSQLquery(query, "Insert");
         
+        
+        
         String blankQuery = "call themLogin('%s', '%s', 2)";
         String sqlQuery = String.format(blankQuery,
                 maGiangVienTf.getText(),
                 "123456");
         ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them tai khoan");
+        updateTable();
     }//GEN-LAST:event_themBtnActionPerformed
   
     private void hocViTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hocViTFActionPerformed
@@ -727,6 +730,16 @@ public class InfoTeacher extends javax.swing.JFrame {
                 new InfoTeacher().setVisible(true);
             }
         });
+    }
+    
+    private void updateTable() {
+        try {
+            String blankQuery = "call timNCGiangVien('')";
+            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(blankQuery, "hello");
+            giangVienTable.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

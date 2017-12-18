@@ -44,7 +44,7 @@ public class PDFF {
             paragraph2.setFont(font1);
             paragraph2.add(new Chunk(image, 0, -90));
             Phrase phrase = new Phrase(200);
-            phrase.add("                                                              Độc lập - Tự do - Hạnh phúc");
+            phrase.add("                                                                   Độc lập - Tự do - Hạnh phúc");
             phrase.add("                                                          ");
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");
@@ -55,7 +55,7 @@ public class PDFF {
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");
             phrase.add("                                                            "
-                    + "                                                           " + ngaythangnam);
+                    + "                                                                                        " + ngaythangnam);
             phrase.add("                                                                                    ");
             phrase.add("                                                                                    ");
             phrase.add("                                                                                    ");
@@ -110,7 +110,7 @@ public class PDFF {
             paragraph5.add("                           ");
             paragraph5.add("                            Người lập                                               Xác nhân            ");
             paragraph5.add("                                                    ");
-            paragraph5.add("(Ký và ghi rõ họ tên)                                       (Ký và ghi rõ họ tên)");
+            paragraph5.add("          (Ký và ghi rõ họ tên)                               (Ký và ghi rõ họ tên)");
             document.add(paragraph5);
             document.close();
 
