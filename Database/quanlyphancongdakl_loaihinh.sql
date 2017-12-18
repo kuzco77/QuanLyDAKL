@@ -36,7 +36,7 @@ CREATE TABLE `loaihinh` (
 
 LOCK TABLES `loaihinh` WRITE;
 /*!40000 ALTER TABLE `loaihinh` DISABLE KEYS */;
-INSERT INTO `loaihinh` VALUES ('CTTT','A',2),('CĐ','B',1),('DHCQ','A',1),('HEDSPI-A','A',2),('HEDSPI-B','B',2),('ICT','A',2),('KSCLC','A',2),('KSTN','A',1.5),('SIE','B',3),('TC','B',1.5),('VB2','B',1.5);
+INSERT INTO `loaihinh` VALUES ('CTTT','A',2),('CĐ','B',1),('DHCQ','A',1),('EEE','B',4),('HEDSPI-A','A',2),('HEDSPI-B','B',2),('ICT','A',2),('KSCLC','A',2),('KSTN','A',1.5),('SIE','B',3),('TC','B',1.5),('VB2','B',1.5);
 /*!40000 ALTER TABLE `loaihinh` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -49,4 +49,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-09 10:28:30
+-- Dump completed on 2017-12-14 20:21:22

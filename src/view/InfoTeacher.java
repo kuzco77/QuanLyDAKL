@@ -5,21 +5,27 @@
  */
 package view;
 
+import PDF.PDFF;
 import conn.ConnectionToDatabase;
 import static conn.ConnectionToDatabase.getJDBCConnection;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -92,7 +98,7 @@ public class InfoTeacher extends javax.swing.JFrame {
             if((st.executeUpdate(query))==1)
             {
                 // refresh jatable data
-                DefaultTableModel model=(DefaultTableModel)jTable_gv.getModel();
+                DefaultTableModel model=(DefaultTableModel)giangVienTable.getModel();
                 // ham nay dung de reset lai toan bo du lieu nhe
                 model.setRowCount(0);
                 showtt_GiaoVien_totable();
@@ -108,7 +114,7 @@ public class InfoTeacher extends javax.swing.JFrame {
     public void showtt_GiaoVien_totable(){
         ArrayList<BangGiaoVien> list=getListGiaoVien();
         // gọi đến bảng
-        DefaultTableModel model=(DefaultTableModel)jTable_gv.getModel();
+        DefaultTableModel model=(DefaultTableModel)giangVienTable.getModel();
         Object[] row=new Object[12];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getMagv();
@@ -130,6 +136,8 @@ public class InfoTeacher extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -165,7 +173,24 @@ public class InfoTeacher extends javax.swing.JFrame {
         xuatBaoCaoBtn = new javax.swing.JButton();
         nhapTuFileBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_gv = new javax.swing.JTable();
+        giangVienTable = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         addWindowListener(new java.awt.event.WindowAdapter() {
@@ -250,6 +275,8 @@ public class InfoTeacher extends javax.swing.JFrame {
         diaChiTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         boMonTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+
+        jDateChooser_NgaySinh.setDateFormatString("yyyy-MM-dd\n");
 
         jTextField_TenGiangVien.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
@@ -343,7 +370,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                                 .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(23, 23, 23)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(chucVuTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
@@ -352,7 +379,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hoVaTenDemTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel3))))
-                .addGap(31, 31, 31)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -370,11 +397,11 @@ public class InfoTeacher extends javax.swing.JFrame {
                             .addComponent(jLabel12))
                         .addGap(34, 34, 34))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 32, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel4))
-                        .addGap(36, 36, 36)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hocHamTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
@@ -387,8 +414,8 @@ public class InfoTeacher extends javax.swing.JFrame {
                         .addGap(46, 46, 46))))
         );
 
-        themBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        themBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/add_ic.png"))); // NOI18N
+        themBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        themBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-resize.png"))); // NOI18N
         themBtn.setText("Thêm");
         themBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -396,8 +423,8 @@ public class InfoTeacher extends javax.swing.JFrame {
             }
         });
 
-        suaBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        suaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/fix_ic.png"))); // NOI18N
+        suaBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        suaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/maintenance-resize.png"))); // NOI18N
         suaBtn.setText("Sửa");
         suaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -405,8 +432,8 @@ public class InfoTeacher extends javax.swing.JFrame {
             }
         });
 
-        xoaBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        xoaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/delete_ic.png"))); // NOI18N
+        xoaBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xoaBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-resize.png"))); // NOI18N
         xoaBtn.setText("Xóa");
         xoaBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -414,8 +441,8 @@ public class InfoTeacher extends javax.swing.JFrame {
             }
         });
 
-        huyBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        huyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/cancel_ic.png"))); // NOI18N
+        huyBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        huyBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-resize.png"))); // NOI18N
         huyBtn.setText("Hủy");
         huyBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -423,15 +450,20 @@ public class InfoTeacher extends javax.swing.JFrame {
             }
         });
 
-        xuatBaoCaoBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        xuatBaoCaoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/output_ic.png"))); // NOI18N
+        xuatBaoCaoBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        xuatBaoCaoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
         xuatBaoCaoBtn.setText("Xuất báo cáo");
+        xuatBaoCaoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xuatBaoCaoBtnActionPerformed(evt);
+            }
+        });
 
-        nhapTuFileBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        nhapTuFileBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/input_file_ic.png"))); // NOI18N
+        nhapTuFileBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        nhapTuFileBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
         nhapTuFileBtn.setText("Nhập từ file");
 
-        jTable_gv.setModel(new javax.swing.table.DefaultTableModel(
+        giangVienTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -439,12 +471,12 @@ public class InfoTeacher extends javax.swing.JFrame {
                 "Mã giảng Viên", "Họ", "Tên", "Giới Tính", "Học hàm", "Học vị", "Ngày Sinh", "Chức vụ", "Điện thoai", "Email", "Địa chỉ", "Bộ môn"
             }
         ));
-        jTable_gv.addMouseListener(new java.awt.event.MouseAdapter() {
+        giangVienTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_gvMouseClicked(evt);
+                giangVienTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable_gv);
+        jScrollPane2.setViewportView(giangVienTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -454,17 +486,17 @@ public class InfoTeacher extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(xuatBaoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xuatBaoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(56, 56, 56)
-                        .addComponent(nhapTuFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(nhapTuFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(themBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 111, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(themBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(113, 113, 113)
-                        .addComponent(suaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(suaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(116, 116, 116)
-                        .addComponent(xoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(xoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(133, 133, 133)
-                        .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 113, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
@@ -491,7 +523,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xuatBaoCaoBtn)
                     .addComponent(nhapTuFileBtn))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(16, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -605,10 +637,10 @@ public class InfoTeacher extends javax.swing.JFrame {
         executeSQLquery(query, "Update");
     }//GEN-LAST:event_suaBtnActionPerformed
 
-    private void jTable_gvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_gvMouseClicked
+    private void giangVienTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_giangVienTableMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel model=(DefaultTableModel) jTable_gv.getModel();
-        int i=jTable_gv.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel) giangVienTable.getModel();
+        int i=giangVienTable.getSelectedRow();
         try {
             Date date=new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 6).toString());
             maGiangVienTf.setText(model.getValueAt(i, 0).toString());
@@ -627,8 +659,41 @@ public class InfoTeacher extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_jTable_gvMouseClicked
+    }//GEN-LAST:event_giangVienTableMouseClicked
 
+    private void xuatBaoCaoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatBaoCaoBtnActionPerformed
+        infileTest();
+    }//GEN-LAST:event_xuatBaoCaoBtnActionPerformed
+
+    private void infileTest() {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = "Danh sách giảng viên";
+        PDFF.makePDF(file, target, ngaythangnam, giangVienTable);
+        openOnFly(file);
+    }
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
     /**
      * @param args the command line arguments
      */
@@ -670,12 +735,15 @@ public class InfoTeacher extends javax.swing.JFrame {
     private javax.swing.JTextField diaChiTF;
     private javax.swing.JTextField dienThoaiTF;
     private javax.swing.JTextField emailTF;
+    private javax.swing.JTable giangVienTable;
     private javax.swing.JTextField gioiTinhTF;
     private javax.swing.JTextField hoVaTenDemTF;
     private javax.swing.JTextField hocHamTF;
     private javax.swing.JTextField hocViTF;
     private javax.swing.JButton huyBtn;
     private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -693,7 +761,6 @@ public class InfoTeacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_gv;
     private javax.swing.JTextField jTextField_TenGiangVien;
     private javax.swing.JTextField maGiangVienTf;
     private javax.swing.JButton nhapTuFileBtn;

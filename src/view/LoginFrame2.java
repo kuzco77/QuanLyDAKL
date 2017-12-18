@@ -83,54 +83,54 @@ public class LoginFrame2 extends javax.swing.JFrame {
     // Insert dữ liệu từ bảng giảng viên sang bảng login
     // mật khẩu và pass word của giáo viên đều là mã giảng viên
     // Thêm 1 trường thay đổi mật khẩu --> Lưu vào đâu login --> loại 1 và loại 2
-    private void InsertTeachertoLogin(){
-        // kết nối cơ sở dữ liệu
-        Connection conn=ConnectionToDatabase.getJDBCConnection();
-        String sql="SELECT maGiangVien FROM quanlyphancongdakl.giangvien";
-        Statement st,st1;
-        ResultSet rs;
-        String MagiangVien="";
-        String loai="0";
-        try {
-            st=conn.createStatement();
-            rs=st.executeQuery(sql);
-            while(rs.next()){
-                MagiangVien=rs.getString("maGiangVien");
-                // insert Toàn bộ dữ liệu zo bảng
-                String sql1="INSERT INTO `quanlyphancongdakl`.`login`"
-                        + " (`tenDangNhap`, `matKhau`, `loai`) "
-                        + "VALUES ('"+MagiangVien+"', '"+MagiangVien+"', '"+loai+"')";
-                st1=conn.createStatement();
-                // Update Dữ liệu thành công
-                if(st1.executeUpdate(sql1)==1){
-                    System.out.println("Updated "+MagiangVien+" Vào bảng Login....");
-                }               
-            }
-            
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-    private void DeleteAllGiangVien(){
-        // Câu lệnh này thành công khi phải có 1 ảo
-        Connection conn=ConnectionToDatabase.getJDBCConnection();
-        String sql2="delete from login\n" +
-        "where tenDangNhap!='admin'";
-        Statement st2;
-        ResultSet rs;
-        try {
-            st2=conn.createStatement();
-            int a=st2.executeUpdate(sql2);
-            if(a<1){
-                System.out.println("Deleted no Successfully");
-            }
-            else{
-                InsertTeachertoLogin();
-            }
-        } catch (SQLException ex) {
-            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
+//    private void InsertTeachertoLogin(){
+//        // kết nối cơ sở dữ liệu
+//        Connection conn=ConnectionToDatabase.getJDBCConnection();
+//        String sql="SELECT maGiangVien FROM quanlyphancongdakl.giangvien";
+//        Statement st,st1;
+//        ResultSet rs;
+//        String MagiangVien="";
+//        String loai="0";
+//        try {
+//            st=conn.createStatement();
+//            rs=st.executeQuery(sql);
+//            while(rs.next()){
+//                MagiangVien=rs.getString("maGiangVien");
+//                // insert Toàn bộ dữ liệu zo bảng
+//                String sql1="INSERT INTO `quanlyphancongdakl`.`login`"
+//                        + " (`tenDangNhap`, `matKhau`, `loai`) "
+//                        + "VALUES ('"+MagiangVien+"', '"+MagiangVien+"', '"+loai+"')";
+//                st1=conn.createStatement();
+//                // Update Dữ liệu thành công
+//                if(st1.executeUpdate(sql1)==1){
+//                    System.out.println("Updated "+MagiangVien+" Vào bảng Login....");
+//                }               
+//            }
+//            
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
+//    private void DeleteAllGiangVien(){
+//        // Câu lệnh này thành công khi phải có 1 ảo
+//        Connection conn=ConnectionToDatabase.getJDBCConnection();
+//        String sql2="delete from login\n" +
+//        "where tenDangNhap!='admin'";
+//        Statement st2;
+//        ResultSet rs;
+//        try {
+//            st2=conn.createStatement();
+//            int a=st2.executeUpdate(sql2);
+//            if(a<1){
+//                System.out.println("Deleted no Successfully");
+//            }
+//            else{
+//                InsertTeachertoLogin();
+//            }
+//        } catch (SQLException ex) {
+//            Logger.getLogger(LoginFrame2.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//    }
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {

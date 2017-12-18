@@ -5,21 +5,27 @@
  */
 package view;
 
+import PDF.PDFF;
 import conn.ConnectionToDatabase;
 import static conn.ConnectionToDatabase.getJDBCConnection;
 import java.awt.Color;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.logging.SimpleFormatter;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
@@ -36,6 +42,8 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
     /**
      * Creates new form AssignmentDetailsForAStudent
      */
+    private String maLop = "";
+    
     // b1 : lấy toàn bộ mã sinh viên trong cơ sở dư liệu
     // Nhiệm vụ sau khi chọn thêm vào 1 Mã giống nhau thì ngay lập tức nó sẽ lọc tất cả dữ liệu : mã lớp chỉ lấy mã lớp mới
     ArrayList<String> ResultListMssv;
@@ -108,15 +116,18 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         return a;
      }
     static int key=0;
-    public AssignmentDetailsForAStudent() {
+    
+    public AssignmentDetailsForAStudent(String maLop) {
         initComponents();
+        this.maLop = maLop;
+        maLopTf.setText(maLop);
+        maLopTf.setEditable(false);
         getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
         setTitle("Phân công đồ án- khối lượng môn học cho sinh viên");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         updateTable();
-//        fillcomboxMSSV();
     }
     // thực hiện thêm các thao tác thêm sửa xóa
      public ArrayList<BangChitietPhanCongHD> getListCTHD(){
@@ -155,7 +166,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
             if((st.executeUpdate(query))==1)
             {
                 // refresh jatable data
-                DefaultTableModel model=(DefaultTableModel)chiTietPhanCongBtn.getModel();
+                DefaultTableModel model=(DefaultTableModel)chiTietPhanCongTable.getModel();
                 // ham nay dung de reset lai toan bo du lieu nhe
                 model.setRowCount(0);
                 showtt_ChitietPC_totable();
@@ -171,7 +182,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
     public void showtt_ChitietPC_totable(){
         ArrayList<BangChitietPhanCongHD> list=getListCTHD();
         // gọi đến bảng
-        DefaultTableModel model=(DefaultTableModel)chiTietPhanCongBtn.getModel();
+        DefaultTableModel model=(DefaultTableModel)chiTietPhanCongTable.getModel();
         Object[] row=new Object[7];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getMssv();
@@ -195,6 +206,8 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -217,7 +230,24 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
         jButton2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        chiTietPhanCongBtn = new javax.swing.JTable();
+        chiTietPhanCongTable = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -353,20 +383,20 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                     .addComponent(diemThiTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel6)
                     .addComponent(mssvTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tenBaoCaoTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jLabel4)
                     .addComponent(maLopTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addComponent(ngayNopBaoCaoDC, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                         .addComponent(jLabel7)
                         .addComponent(diemQuaTrinhTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 56, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(themBtn)
                     .addComponent(suaBtn)
@@ -376,11 +406,11 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         );
 
         jButton1.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/output_ic.png"))); // NOI18N
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
         jButton1.setText("Xuất báo cáo");
 
         jButton2.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/input_file_ic.png"))); // NOI18N
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
         jButton2.setText("Nhập từ file");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -388,7 +418,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
             }
         });
 
-        chiTietPhanCongBtn.setModel(new javax.swing.table.DefaultTableModel(
+        chiTietPhanCongTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -396,12 +426,12 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                 "MSSV", "mã lớp", "Điểm quá trình", "Điểm thi", "Báo cáo", "Ngày nộp", "Số thứ tự"
             }
         ));
-        chiTietPhanCongBtn.addMouseListener(new java.awt.event.MouseAdapter() {
+        chiTietPhanCongTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                chiTietPhanCongBtnMouseClicked(evt);
+                chiTietPhanCongTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(chiTietPhanCongBtn);
+        jScrollPane2.setViewportView(chiTietPhanCongTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -413,10 +443,10 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(860, 860, 860)
-                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 156, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(39, 39, 39)
-                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 162, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 28, Short.MAX_VALUE))
+                        .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.Alignment.TRAILING))
                 .addContainerGap())
         );
@@ -485,7 +515,36 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
            } 
         }
         
-        
+    }
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
+    
+    private void infileTest() {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = "Danh sách phân công";
+        PDFF.makePDF(file, target, ngaythangnam, chiTietPhanCongTable); 
+        openOnFly(file);
     }//GEN-LAST:event_themBtnActionPerformed
     // nếu như ta xóa đi 1 sinh viên trong bảng sinh viên thì phải xóa trong bảng còn lại --> Xung đột
     // đã có sinh viên thì phải có phân công hướng dẫn
@@ -506,11 +565,11 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_xoaBtnActionPerformed
 
-    private void chiTietPhanCongBtnMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chiTietPhanCongBtnMouseClicked
+    private void chiTietPhanCongTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_chiTietPhanCongTableMouseClicked
         // TODO add your handling code here:
         // khi click vào bảng nó bị thay đổi dữ liệu rồi
-        DefaultTableModel model=(DefaultTableModel) chiTietPhanCongBtn.getModel();
-        int i=chiTietPhanCongBtn.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel) chiTietPhanCongTable.getModel();
+        int i=chiTietPhanCongTable.getSelectedRow();
         try {
             // toString(): trả về giá trị của các đối tượng
             Date date=new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 5).toString());
@@ -526,7 +585,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         }
         
         
-    }//GEN-LAST:event_chiTietPhanCongBtnMouseClicked
+    }//GEN-LAST:event_chiTietPhanCongTableMouseClicked
 
     private void diemThiTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_diemThiTfActionPerformed
         // TODO add your handling code here:
@@ -570,7 +629,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AssignmentDetailsForAStudent().setVisible(true);
+                new AssignmentDetailsForAStudent("").setVisible(true);
             }
         });
     }
@@ -609,21 +668,24 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
     
     private void updateTable() {
         try {
-            String sqlQuery = "SELECT * FROM viewchiTietPhanCongHuongDan";
+            String blankQuery = "call quanlyphancongdakl.timNCChiTietPhanCongHuongDan('%s')";
+            String sqlQuery = String.format(blankQuery, maLop);
             DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "chi tiet phan cong huong dan");
-            chiTietPhanCongBtn.setModel(model);
+            chiTietPhanCongTable.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(AssignmentDetailsForAStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable chiTietPhanCongBtn;
+    private javax.swing.JTable chiTietPhanCongTable;
     private javax.swing.JTextField diemQuaTrinhTf;
     private javax.swing.JTextField diemThiTf;
     private javax.swing.JButton huyBtn;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;

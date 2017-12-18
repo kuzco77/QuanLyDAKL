@@ -346,6 +346,9 @@ private static final String TEST = "test";
             }
         });
         baoCaoMENU.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                baoCaoMENUMouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 baoCaoMENUMouseExited(evt);
             }
@@ -1145,17 +1148,18 @@ private static final String TEST = "test";
     }//GEN-LAST:event_quanLySinhVienActionPerformed
 
     private void quanLyHocPhan2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quanLyHocPhan2ActionPerformed
-        // TODO add your handling code here:
+        InfoType frame = new InfoType();
+        frame.setVisible(true);
     }//GEN-LAST:event_quanLyHocPhan2ActionPerformed
 
     private void quanLyHocPhan1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quanLyHocPhan1ActionPerformed
         // TODO add your handling code here:
-        InfoAssignmentForClass pchd=new InfoAssignmentForClass();
+        InfoAssignmentForClass pchd=new InfoAssignmentForClass("");
         pchd.setVisible(true);
     }//GEN-LAST:event_quanLyHocPhan1ActionPerformed
 
     private void quanLyHocPhanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_quanLyHocPhanActionPerformed
-        AssignmentDetailsForAStudent pcct = new AssignmentDetailsForAStudent();
+        AssignmentDetailsForAStudent pcct = new AssignmentDetailsForAStudent("");
         pcct.setVisible(true);
     }//GEN-LAST:event_quanLyHocPhanActionPerformed
 
@@ -1215,9 +1219,14 @@ private static final String TEST = "test";
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void phanCongMENUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phanCongMENUMouseClicked
-        KeKhaiFrame frame = new KeKhaiFrame();
+        KeKhaiFrame frame = new KeKhaiFrame(maNguoiDung);
         frame.setVisible(true);
     }//GEN-LAST:event_phanCongMENUMouseClicked
+
+    private void baoCaoMENUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_baoCaoMENUMouseClicked
+        ReportFrame frame = new ReportFrame();
+        frame.setVisible(true);
+    }//GEN-LAST:event_baoCaoMENUMouseClicked
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);
@@ -1242,6 +1251,11 @@ private static final String TEST = "test";
         listOptionMenu.add(REPORT, baoCaoMENU);
         listOptionMenu.add(ASSIGNMENT, phanCongMENU);
         listOptionMenu.add(INFOMATION, thongTinMENU);
+    }
+    
+    public static void main(String[] args) {
+        Main3 frame = new Main3("admin", 1);
+        frame.setVisible(true);
     }
 
     private ArrayList<JLabel> listOptionMenu = new ArrayList<>();

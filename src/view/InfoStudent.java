@@ -5,7 +5,9 @@
  */
 package view;
 
+import PDF.PDFF;
 import static conn.ConnectionToDatabase.getJDBCConnection;
+import java.awt.Desktop;
 import java.awt.Toolkit;
 import java.io.File;
 import java.io.IOException;
@@ -15,6 +17,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
@@ -87,7 +90,7 @@ public class InfoStudent extends javax.swing.JFrame {
             if((st.executeUpdate(query))==1)
             {
                 // refresh jatable data
-                DefaultTableModel model=(DefaultTableModel)Jtable_SinhVien.getModel();
+                DefaultTableModel model=(DefaultTableModel)sinhVienTable.getModel();
                 // ham nay dung de reset lai toan bo du lieu nhe
                 model.setRowCount(0);
                 showtt_SinhVien_totable();
@@ -103,7 +106,7 @@ public class InfoStudent extends javax.swing.JFrame {
     public void showtt_SinhVien_totable(){
         ArrayList<BangSinhVien> list=getListSinhVien();
         // gọi đến bảng
-        DefaultTableModel model=(DefaultTableModel)Jtable_SinhVien.getModel();
+        DefaultTableModel model=(DefaultTableModel)sinhVienTable.getModel();
         Object[] row=new Object[9];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getMassv();
@@ -129,6 +132,8 @@ public class InfoStudent extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jSeparator1 = new javax.swing.JSeparator();
@@ -157,7 +162,24 @@ public class InfoStudent extends javax.swing.JFrame {
         xuatBtn = new javax.swing.JButton();
         nhapBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        Jtable_SinhVien = new javax.swing.JTable();
+        sinhVienTable = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -315,25 +337,25 @@ public class InfoStudent extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jTextField_Mssv, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jTextField_HoTen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel3)
                     .addComponent(jTextField_Khoa, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel8))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel9)
                     .addComponent(jTextField_Email, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(30, 30, 30)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel5)
                     .addComponent(jLabel7)
                     .addComponent(jTextField_GioiTinh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jTextField_DienThoai, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(42, 42, 42)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel6)
                     .addComponent(jLabel11)
@@ -351,6 +373,11 @@ public class InfoStudent extends javax.swing.JFrame {
         xuatBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         xuatBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
         xuatBtn.setText("Xuất báo cáo");
+        xuatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                xuatBtnActionPerformed(evt);
+            }
+        });
 
         nhapBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nhapBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
@@ -361,7 +388,7 @@ public class InfoStudent extends javax.swing.JFrame {
             }
         });
 
-        Jtable_SinhVien.setModel(new javax.swing.table.DefaultTableModel(
+        sinhVienTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -369,12 +396,12 @@ public class InfoStudent extends javax.swing.JFrame {
                 "MSSV", "Họ và Tên", "Ngày Sinh", "Giới tính", "Lớp", "Khóa", "Email", "Điện Thoại", "Quê Quán"
             }
         ));
-        Jtable_SinhVien.addMouseListener(new java.awt.event.MouseAdapter() {
+        sinhVienTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                Jtable_SinhVienMouseClicked(evt);
+                sinhVienTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(Jtable_SinhVien);
+        jScrollPane2.setViewportView(sinhVienTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -403,7 +430,7 @@ public class InfoStudent extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 239, Short.MAX_VALUE)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 281, Short.MAX_VALUE)
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xuatBtn)
@@ -442,10 +469,10 @@ public class InfoStudent extends javax.swing.JFrame {
         executeSQLquery(query, "Insert Success!!");
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void Jtable_SinhVienMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_Jtable_SinhVienMouseClicked
+    private void sinhVienTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_sinhVienTableMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel model=(DefaultTableModel)Jtable_SinhVien.getModel();
-        int i=Jtable_SinhVien.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel)sinhVienTable.getModel();
+        int i=sinhVienTable.getSelectedRow();
         try {
             // hàm toString():
         Date date=new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 2).toString());
@@ -462,7 +489,7 @@ public class InfoStudent extends javax.swing.JFrame {
             Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-    }//GEN-LAST:event_Jtable_SinhVienMouseClicked
+    }//GEN-LAST:event_sinhVienTableMouseClicked
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
@@ -511,6 +538,10 @@ public class InfoStudent extends javax.swing.JFrame {
             //jTable1.setModel(model);
     }//GEN-LAST:event_nhapBtnActionPerformed
 
+    private void xuatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatBtnActionPerformed
+        infileTest();
+    }//GEN-LAST:event_xuatBtnActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -548,21 +579,52 @@ public class InfoStudent extends javax.swing.JFrame {
     
     private void updateTable() {
         try {
-            String sqlQuery = "SELECT * FROM quanlyphancongdakl.viewsinhvien";
+            String sqlQuery = "call timNCSinhVien('');";
             DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "view sinh vien");
-            Jtable_SinhVien.setModel(model);
+            sinhVienTable.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    private void infileTest() {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = "Thông tin sách";
+        PDFF.makePDF(file, target, ngaythangnam, sinhVienTable);
+        openOnFly(file);
+    }
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTable Jtable_SinhVien;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
@@ -585,6 +647,7 @@ public class InfoStudent extends javax.swing.JFrame {
     private javax.swing.JTextField jTextField_Mssv;
     private javax.swing.JTextField jTextField_QueQuan;
     private javax.swing.JButton nhapBtn;
+    private javax.swing.JTable sinhVienTable;
     private javax.swing.JButton xuatBtn;
     // End of variables declaration//GEN-END:variables
 }

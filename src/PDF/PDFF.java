@@ -44,8 +44,8 @@ public class PDFF {
             paragraph2.setFont(font1);
             paragraph2.add(new Chunk(image, 0, -90));
             Phrase phrase = new Phrase(200);
-            phrase.add("                                                 Độc lập - Tự do - Hạnh phúc");
-            phrase.add("                                                         Họ Tên: Chu Nam Anh ");
+            phrase.add("                                                      Độc lập - Tự do - Hạnh phúc");
+            phrase.add("                                                          ");
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");
@@ -148,7 +148,7 @@ public class PDFF {
             paragraph2.add(new Chunk(image, 0, -90));
             Phrase phrase = new Phrase(200);
             phrase.add("Thư viện Tạ Quang Bửu                            Độc lập - Tự do - Hạnh phúc");
-            phrase.add("                                     Họ Tên: Chu Nam Anh ");
+            phrase.add("                                                        ");
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");
             phrase.add("                                                                     ");

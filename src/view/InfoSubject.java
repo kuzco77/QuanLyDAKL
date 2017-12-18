@@ -16,6 +16,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import model.ServiceModel;
 import quanlydakl.BangHocPhan;
 import quanlydakl.BangSinhVien;
 
@@ -30,11 +31,12 @@ public class InfoSubject extends javax.swing.JFrame {
      */
     public InfoSubject() {
         initComponents();
-        showtt_Hocphan_totable();
+//        showtt_Hocphan_totable();
         setLocationRelativeTo(null);
         setTitle("Thông tin các môn học");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        updateTable();
     }
       public ArrayList<BangHocPhan> getListHocphan(){
        ArrayList<BangHocPhan> danhsachhp=new ArrayList<BangHocPhan>();
@@ -69,7 +71,7 @@ public class InfoSubject extends javax.swing.JFrame {
             if((st.executeUpdate(query))==1)
             {
                 // refresh jatable data
-                DefaultTableModel model=(DefaultTableModel)jTable_Hocphan.getModel();
+                DefaultTableModel model=(DefaultTableModel)hocPhanTable.getModel();
                 // ham nay dung de reset lai toan bo du lieu nhe
                 model.setRowCount(0);
                 showtt_Hocphan_totable();
@@ -85,7 +87,7 @@ public class InfoSubject extends javax.swing.JFrame {
     public void showtt_Hocphan_totable(){
         ArrayList<BangHocPhan> list=getListHocphan();
         // gọi đến bảng
-        DefaultTableModel model=(DefaultTableModel)jTable_Hocphan.getModel();
+        DefaultTableModel model=(DefaultTableModel)hocPhanTable.getModel();
         Object[] row=new Object[9];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getMahp();
@@ -112,18 +114,18 @@ public class InfoSubject extends javax.swing.JFrame {
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
-        jTextField_Mahocphan = new javax.swing.JTextField();
-        jTextField_Tenhp = new javax.swing.JTextField();
-        jTextField_STC = new javax.swing.JTextField();
-        jTextField_TCHP = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        maHocPhanTf = new javax.swing.JTextField();
+        tenHocPhanTf = new javax.swing.JTextField();
+        soTinChiTf = new javax.swing.JTextField();
+        soTinChiHocPhiTf = new javax.swing.JTextField();
+        themBtn = new javax.swing.JButton();
+        suabtn = new javax.swing.JButton();
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_Hocphan = new javax.swing.JTable();
+        hocPhanTable = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -142,18 +144,18 @@ public class InfoSubject extends javax.swing.JFrame {
         jLabel5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel5.setText("Số tín chỉ:");
 
-        jTextField_Mahocphan.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jTextField_Mahocphan.addActionListener(new java.awt.event.ActionListener() {
+        maHocPhanTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        maHocPhanTf.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jTextField_MahocphanActionPerformed(evt);
+                maHocPhanTfActionPerformed(evt);
             }
         });
 
-        jTextField_Tenhp.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        tenHocPhanTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jTextField_STC.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        soTinChiTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jTextField_TCHP.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        soTinChiHocPhiTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -166,11 +168,11 @@ public class InfoSubject extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Tenhp, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(tenHocPhanTf, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jTextField_Mahocphan, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(maHocPhanTf, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -183,8 +185,8 @@ public class InfoSubject extends javax.swing.JFrame {
                             .addComponent(jLabel5, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(25, 25, 25)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTextField_STC, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField_TCHP, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(soTinChiTf, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(soTinChiHocPhiTf, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(73, Short.MAX_VALUE))))
         );
         jPanel1Layout.setVerticalGroup(
@@ -194,41 +196,41 @@ public class InfoSubject extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jLabel1)
                     .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(29, 29, 29)
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5)
-                    .addComponent(jTextField_Mahocphan, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_STC, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(60, 60, 60)
+                    .addComponent(maHocPhanTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(soTinChiTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(20, 20, 20)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel4)
                     .addComponent(jLabel3)
-                    .addComponent(jTextField_Tenhp, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jTextField_TCHP, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(42, Short.MAX_VALUE))
+                    .addComponent(tenHocPhanTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(soTinChiHocPhiTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(20, Short.MAX_VALUE))
         );
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/add_ic.png"))); // NOI18N
-        jButton1.setText("Thêm");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        themBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        themBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/plus-resize.png"))); // NOI18N
+        themBtn.setText("Thêm");
+        themBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                themBtnActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/fix_ic.png"))); // NOI18N
-        jButton2.setText("Sửa");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        suabtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        suabtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/maintenance-resize.png"))); // NOI18N
+        suabtn.setText("Sửa");
+        suabtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                suabtnActionPerformed(evt);
             }
         });
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/delete_ic.png"))); // NOI18N
+        jButton3.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/delete-resize.png"))); // NOI18N
         jButton3.setText("Xóa");
         jButton3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -236,8 +238,8 @@ public class InfoSubject extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/cancel_ic.png"))); // NOI18N
+        jButton4.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/icons8-cancel-resize.png"))); // NOI18N
         jButton4.setText("Hủy");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -245,15 +247,15 @@ public class InfoSubject extends javax.swing.JFrame {
             }
         });
 
-        jButton5.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/output_ic.png"))); // NOI18N
+        jButton5.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
         jButton5.setText("Xuất báo cáo");
 
-        jButton6.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/input_file_ic.png"))); // NOI18N
+        jButton6.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
         jButton6.setText("Nhập từ file");
 
-        jTable_Hocphan.setModel(new javax.swing.table.DefaultTableModel(
+        hocPhanTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -261,12 +263,12 @@ public class InfoSubject extends javax.swing.JFrame {
                 "Ma hoc phan", "Ten hoc phan", "So tin chi", "So tin chi hoc phi"
             }
         ));
-        jTable_Hocphan.addMouseListener(new java.awt.event.MouseAdapter() {
+        hocPhanTable.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                jTable_HocphanMouseClicked(evt);
+                hocPhanTableMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(jTable_Hocphan);
+        jScrollPane2.setViewportView(hocPhanTable);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -288,12 +290,12 @@ public class InfoSubject extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(layout.createSequentialGroup()
                 .addGap(68, 68, 68)
-                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(55, 55, 55)
-                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 135, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(74, 74, 74)
-                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 146, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(themBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(85, 85, 85)
+                .addComponent(suabtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(88, 88, 88)
                 .addComponent(jButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(94, 94, 94))
         );
@@ -306,69 +308,74 @@ public class InfoSubject extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton4)
                     .addComponent(jButton3)
-                    .addComponent(jButton2)
-                    .addComponent(jButton1))
+                    .addComponent(suabtn)
+                    .addComponent(themBtn))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41)
+                .addGap(20, 20, 20)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton5)
                     .addComponent(jButton6))
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jTextField_MahocphanActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextField_MahocphanActionPerformed
+    private void maHocPhanTfActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_maHocPhanTfActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jTextField_MahocphanActionPerformed
+    }//GEN-LAST:event_maHocPhanTfActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void suabtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suabtnActionPerformed
         // TODO add your handling code here:
-        String query="UPDATE `quanlyphancongdakl`.`hocphan` "
-                + "SET"
-                + " `tenhp`='"+jTextField_Tenhp.getText()+"', "
-                + "`tinchi`='"+jTextField_STC.getText()+"', "
-                + "`tinchihp`='"+jTextField_TCHP.getText()+"'"
-                + " WHERE `mahp`='"+jTextField_Mahocphan.getText()+"';";
-        executeSQLquery(query,"Updated");
-    }//GEN-LAST:event_jButton2ActionPerformed
+        String blankQuery = "call suaHocPhan('%s','%s','%s','%s')";
+        String sqlQuery = String.format(blankQuery, 
+                maHocPhanTf.getText(),
+                tenHocPhanTf.getText(),
+                soTinChiTf.getText(),
+                soTinChiHocPhiTf.getText()
+        );
+        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        updateTable();
+    }//GEN-LAST:event_suabtnActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void themBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themBtnActionPerformed
         // TODO add your handling code here:
-        String query="INSERT INTO `quanlyphancongdakl`.`hocphan`"
-                + " (`mahp`, `tenhp`, `tinchi`, `tinchihp`)"
-                + " VALUES ('"+jTextField_Mahocphan.getText()+"',"
-                + " '"+jTextField_Tenhp.getText()+"', "
-                + "'"+jTextField_STC.getText()+"', "
-                + "'"+jTextField_TCHP.getText()+"')";
-        executeSQLquery(query, "Updated");
-    }//GEN-LAST:event_jButton1ActionPerformed
+        String blankQuery = "call themHocPhan('%s','%s','%s','%s')";
+        String sqlQuery = String.format(blankQuery, 
+                maHocPhanTf.getText(),
+                tenHocPhanTf.getText(),
+                soTinChiTf.getText(),
+                soTinChiHocPhiTf.getText()
+        );
+        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        updateTable();
+    }//GEN-LAST:event_themBtnActionPerformed
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
-        int cf=JOptionPane.showConfirmDialog(null, "Bạn muốn xóa tài khoản ???","Xác nhận",JOptionPane.YES_NO_OPTION);
-        if(cf==JOptionPane.YES_OPTION){
-            String query="DELETE FROM `quanlyphancongdakl`.`hocphan` WHERE `mahp`='"+jTextField_Mahocphan.getText()+"'";
-            executeSQLquery(query, "Deleted");
-        }
+        String blankQuery = "call xoaHocPhan('%s')";
+        String sqlQuery = String.format(blankQuery, 
+                maHocPhanTf.getText()
+        );
+        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        updateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jTable_HocphanMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_HocphanMouseClicked
+    private void hocPhanTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_hocPhanTableMouseClicked
         // TODO add your handling code hereDefaultTableModel model=(DefaultTableModel)Jtable_SinhVien.getModel();
-        int i=jTable_Hocphan.getSelectedRow();
-        DefaultTableModel model=(DefaultTableModel)jTable_Hocphan.getModel();
-        jTextField_Mahocphan.setText((model.getValueAt(i, 0).toString()));
-        jTextField_Tenhp.setText(model.getValueAt(i, 1).toString());
-        jTextField_STC.setText(model.getValueAt(i, 2).toString());
-        jTextField_TCHP.setText(model.getValueAt(i, 3).toString());
-    }//GEN-LAST:event_jTable_HocphanMouseClicked
+        int i=hocPhanTable.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel)hocPhanTable.getModel();
+        maHocPhanTf.setText((model.getValueAt(i, 0).toString()));
+        tenHocPhanTf.setText(model.getValueAt(i, 1).toString());
+        soTinChiTf.setText(model.getValueAt(i, 2).toString());
+        soTinChiHocPhiTf.setText(model.getValueAt(i, 3).toString());
+    }//GEN-LAST:event_hocPhanTableMouseClicked
     private void Huy(){
-        jTextField_Mahocphan.setText(null);
-        jTextField_Tenhp.setText(null);
-        jTextField_STC.setText(null);
-        jTextField_TCHP.setText(null);
+        maHocPhanTf.setText(null);
+        tenHocPhanTf.setText(null);
+        soTinChiTf.setText(null);
+        soTinChiHocPhiTf.setText(null);
     }
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
@@ -409,10 +416,19 @@ public class InfoSubject extends javax.swing.JFrame {
             }
         });
     }
+    
+    private void updateTable() {
+        try {
+            String blankQuery = "call timNCHocPhan('')";
+            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(blankQuery, "phan cong huong dan");
+            hocPhanTable.setModel(model);
+        } catch (SQLException ex) {
+            Logger.getLogger(InfoAssignmentForClass.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JTable hocPhanTable;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
@@ -425,10 +441,11 @@ public class InfoSubject extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTable jTable_Hocphan;
-    private javax.swing.JTextField jTextField_Mahocphan;
-    private javax.swing.JTextField jTextField_STC;
-    private javax.swing.JTextField jTextField_TCHP;
-    private javax.swing.JTextField jTextField_Tenhp;
+    private javax.swing.JTextField maHocPhanTf;
+    private javax.swing.JTextField soTinChiHocPhiTf;
+    private javax.swing.JTextField soTinChiTf;
+    private javax.swing.JButton suabtn;
+    private javax.swing.JTextField tenHocPhanTf;
+    private javax.swing.JButton themBtn;
     // End of variables declaration//GEN-END:variables
 }

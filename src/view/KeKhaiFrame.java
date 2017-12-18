@@ -1,14 +1,20 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package view;
 
 import java.awt.Toolkit;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.Normalizer;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.regex.Pattern;
+import javax.swing.ComboBoxModel;
+import javax.swing.DefaultComboBoxModel;
 import static javax.swing.WindowConstants.DISPOSE_ON_CLOSE;
 import javax.swing.table.DefaultTableModel;
 import javax.xml.ws.Service;
@@ -19,26 +25,43 @@ import model.ServiceModel;
  * @author chunamanh
  */
 public class KeKhaiFrame extends javax.swing.JFrame {
-
+    
     /**
      * Creates new form KeKhaiFrame
      */
+    private String maGiangVien = "";
     
-    
-    public KeKhaiFrame() {
+    public KeKhaiFrame(String maGiangVien) {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Phân công đồ án- khối lượng môn học cho lớp");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+        this.maGiangVien = maGiangVien;
+        if (maGiangVien.equalsIgnoreCase("admin")) {
+           fillComboBox();
+           this.maGiangVien = "";
+        }
         
         updateTable("");
     }
     
     private void fillComboBox() {
-        
+        try {
+            ArrayList<String> dsGiangVien = new ArrayList<>();
+            String sqlQuery = "SELECT * FROM giangVien;";
+            ResultSet rs = ServiceModel.getResultSetFromSQLQuery(sqlQuery, "giang vien");
+            while (rs.next()) {
+                String tenDayDu = rs.getObject(2).toString() + ' ' + rs.getObject(3).toString();
+                dsGiangVien.add(tenDayDu);
+                tenGiangVienCb.addItem(tenDayDu);
+            }
+            
+        } catch (SQLException ex) {
+            Logger.getLogger(KeKhaiFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
-
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -57,6 +80,7 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         jLabel27 = new javax.swing.JLabel();
         tenGiangVienCb = new javax.swing.JComboBox<>();
         jLabel28 = new javax.swing.JLabel();
+        capNhatBtn = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -76,16 +100,34 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         jScrollPane1.setViewportView(phanCongTable);
 
         denKyCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "20141", "20142", "20143", "20151", "20152", "20153", "20161", "20162", "20163", "20171", "20172" }));
+        denKyCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                denKyCbActionPerformed(evt);
+            }
+        });
 
         jLabel26.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel26.setText("Từ kỳ:");
 
         jLabel27.setText("Đến kỳ:");
 
-        tenGiangVienCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Item 1", "Item 2", "Item 3", "Item 4" }));
+        tenGiangVienCb.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { " " }));
+        tenGiangVienCb.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                tenGiangVienCbActionPerformed(evt);
+            }
+        });
 
         jLabel28.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         jLabel28.setText("Giảng viên:");
+
+        capNhatBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
+        capNhatBtn.setText("Cập nhật");
+        capNhatBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                capNhatBtnActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel5Layout = new javax.swing.GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
@@ -104,7 +146,9 @@ public class KeKhaiFrame extends javax.swing.JFrame {
                 .addComponent(jLabel28, javax.swing.GroupLayout.PREFERRED_SIZE, 85, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(tenGiangVienCb, javax.swing.GroupLayout.PREFERRED_SIZE, 159, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(capNhatBtn)
+                .addContainerGap())
             .addGroup(jPanel5Layout.createSequentialGroup()
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 1031, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
@@ -112,15 +156,16 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         jPanel5Layout.setVerticalGroup(
             jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel5Layout.createSequentialGroup()
-                .addGap(15, 15, 15)
+                .addGap(14, 14, 14)
                 .addGroup(jPanel5Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(tuKyCB, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(denKyCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel26)
                     .addComponent(jLabel27)
                     .addComponent(tenGiangVienCb, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel28))
-                .addGap(28, 28, 28)
+                    .addComponent(jLabel28)
+                    .addComponent(capNhatBtn))
+                .addGap(27, 27, 27)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 347, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
@@ -144,7 +189,19 @@ public class KeKhaiFrame extends javax.swing.JFrame {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
+    
+    private void capNhatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capNhatBtnActionPerformed
+        updateTable("");
+    }//GEN-LAST:event_capNhatBtnActionPerformed
+    
+    private void tenGiangVienCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenGiangVienCbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_tenGiangVienCbActionPerformed
+    
+    private void denKyCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_denKyCbActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_denKyCbActionPerformed
+    
     /**
      * @param args the command line arguments
      */
@@ -152,8 +209,8 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         /* Set the Nimbus look and feel */
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
         /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
+        * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html
+        */
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -171,88 +228,61 @@ public class KeKhaiFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(KeKhaiFrame.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
-
+        
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KeKhaiFrame().setVisible(true);
+                new KeKhaiFrame("").setVisible(true);
             }
         });
     }
     
     private void updateTable(String tenGiangVien) {
         try {
-            String blankQuery = "call phanCongHuongDanTheoGiangVien('%s')";
-            String sqlQuery = String.format(blankQuery, tenGiangVien);
+            // Lay ma giang vien tu combobox vi ten giang vien khong hoat dong
+            int indexPath = tenGiangVienCb.getSelectedIndex();
+//            String maGiangVien = "";
+//            if (indexPath < 10 && indexPath > 0) {
+//                maGiangVien = "GV000" + indexPath;
+//            } else {
+//                maGiangVien = "GV00" + indexPath;
+//            }
+            
+            String url = covertStringToURL(tenGiangVienCb.getSelectedItem().toString());
+            
+            String blankQuery = "call keKhaiPhanCongHuongDan('%s','%s','%s','%s')";
+            String sqlQuery = String.format(blankQuery,
+                    maGiangVien,
+                    tuKyCB.getSelectedItem().toString(),
+                    denKyCb.getSelectedItem().toString(),
+                    url
+            );
             DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "phan cong huong dan theo giang vien");
             phanCongTable.setModel(model);
         } catch (SQLException ex) {
             Logger.getLogger(KeKhaiFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    
+    public String covertStringToURL(String str) {
+        try {
+            String temp = Normalizer.normalize(str, Normalizer.Form.NFD);
+            Pattern pattern = Pattern.compile("\\p{InCombiningDiacriticalMarks}+");
+            return pattern.matcher(temp).replaceAll("").toLowerCase().replaceAll("đ", "d");
+        } catch (Exception e) {
+            
+        }
+        return "";
+    }
+    
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton capNhatBtn;
     private javax.swing.JComboBox<String> denKyCb;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel25;
     private javax.swing.JLabel jLabel26;
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSeparator jSeparator3;
-    private javax.swing.JSeparator jSeparator4;
-    private javax.swing.JSeparator jSeparator5;
-    private javax.swing.JTextField jTextField_Mahocphan;
-    private javax.swing.JTextField jTextField_Mahocphan1;
-    private javax.swing.JTextField jTextField_Mahocphan2;
-    private javax.swing.JTextField jTextField_Mahocphan3;
-    private javax.swing.JTextField jTextField_Mahocphan4;
-    private javax.swing.JTextField jTextField_STC;
-    private javax.swing.JTextField jTextField_STC1;
-    private javax.swing.JTextField jTextField_STC2;
-    private javax.swing.JTextField jTextField_STC3;
-    private javax.swing.JTextField jTextField_STC4;
-    private javax.swing.JTextField jTextField_TCHP;
-    private javax.swing.JTextField jTextField_TCHP1;
-    private javax.swing.JTextField jTextField_TCHP2;
-    private javax.swing.JTextField jTextField_TCHP3;
-    private javax.swing.JTextField jTextField_TCHP4;
-    private javax.swing.JTextField jTextField_Tenhp;
-    private javax.swing.JTextField jTextField_Tenhp1;
-    private javax.swing.JTextField jTextField_Tenhp2;
-    private javax.swing.JTextField jTextField_Tenhp3;
-    private javax.swing.JTextField jTextField_Tenhp4;
     private javax.swing.JTable phanCongTable;
     private javax.swing.JComboBox<String> tenGiangVienCb;
     private javax.swing.JComboBox<String> tuKyCB;
