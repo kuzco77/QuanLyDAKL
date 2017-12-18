@@ -564,11 +564,11 @@ public class SatisticalFrame extends javax.swing.JFrame {
             switch (type) {
                 case "Sinh viên":                   
                     System.out.println(type);
-                    sqlQuery = "SELECT * FROM tkphancongtheososinhvien";
+                    sqlQuery = "SELECT * FROM tksosinhvientheogiangvientheomonhoc;";
                     break;
                 case "Giờ":
                     System.out.println(type);
-                    sqlQuery = "SELECT * FROM tkphancongtheogio;";
+                    sqlQuery = "SELECT * FROM tksogiotheogiangvientheomonhoc;";
                     break;
                 case "":
                     System.out.println(type);
