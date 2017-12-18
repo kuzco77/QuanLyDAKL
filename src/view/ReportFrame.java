@@ -5,16 +5,23 @@
  */
 package view;
 
+import PDF.PDFF;
 import conn.ConnectionToDatabase;
+import java.awt.Desktop;
 import java.awt.Toolkit;
+import java.io.File;
+import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.LocalDate;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComboBox;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
+import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import model.ServiceModel;
 
@@ -77,6 +84,8 @@ public class ReportFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jDialog1 = new javax.swing.JDialog();
+        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jPanel3 = new javax.swing.JPanel();
@@ -92,9 +101,26 @@ public class ReportFrame extends javax.swing.JFrame {
         maGiangVienCb = new javax.swing.JComboBox<>();
         jLabel5 = new javax.swing.JLabel();
         jComboBox_HocKi = new javax.swing.JComboBox<>();
-        jButton7 = new javax.swing.JButton();
+        baoCaoBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable_BaoCao = new javax.swing.JTable();
+        baoCaoTable = new javax.swing.JTable();
+
+        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
+        jDialog1.getContentPane().setLayout(jDialog1Layout);
+        jDialog1Layout.setHorizontalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+        jDialog1Layout.setVerticalGroup(
+            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jDialog1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -139,6 +165,11 @@ public class ReportFrame extends javax.swing.JFrame {
         jLabel3.setText("Bộ môn:");
 
         jComboBox_MaLopHoc.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NONE" }));
+        jComboBox_MaLopHoc.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jComboBox_MaLopHocActionPerformed(evt);
+            }
+        });
 
         jComboBox_BoMon.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "NONE" }));
 
@@ -213,11 +244,16 @@ public class ReportFrame extends javax.swing.JFrame {
                 .addGap(27, 27, 27))
         );
 
-        jButton7.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/output_ic.png"))); // NOI18N
-        jButton7.setText("In báo cáo");
+        baoCaoBtn.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        baoCaoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/drawable/output_ic.png"))); // NOI18N
+        baoCaoBtn.setText("In báo cáo");
+        baoCaoBtn.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                baoCaoBtnActionPerformed(evt);
+            }
+        });
 
-        jTable_BaoCao.setModel(new javax.swing.table.DefaultTableModel(
+        baoCaoTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -228,7 +264,7 @@ public class ReportFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable_BaoCao);
+        jScrollPane2.setViewportView(baoCaoTable);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -246,7 +282,7 @@ public class ReportFrame extends javax.swing.JFrame {
                                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addGap(18, 18, 18)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(baoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 232, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)))
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 450, Short.MAX_VALUE)
                 .addGap(21, 21, 21))
@@ -259,7 +295,7 @@ public class ReportFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(26, 26, 26)
-                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(baoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 43, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(30, 30, 30)
@@ -290,8 +326,8 @@ public class ReportFrame extends javax.swing.JFrame {
         DefaultTableModel model;
         try {
             model = ServiceModel.getTableModelFromSQLQuery(sql, "Tìm kiếm phân công");
-            jTable_BaoCao.setModel(model);
-            if(jTable_BaoCao.getRowCount()==0){
+            baoCaoTable.setModel(model);
+            if(baoCaoTable.getRowCount()==0){
                 JOptionPane.showMessageDialog(null, "Không có thông tin !");
             }
         } catch (SQLException ex) {
@@ -321,6 +357,14 @@ public class ReportFrame extends javax.swing.JFrame {
             ,jComboBox_HocKi.getSelectedItem().toString());
     UpdateData(sqlquery); 
     }//GEN-LAST:event_phanCongGiaoVienHuongDanBtnActionPerformed
+
+    private void baoCaoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_baoCaoBtnActionPerformed
+        infileTest(baoCaoTable, "Báo cáo");
+    }//GEN-LAST:event_baoCaoBtnActionPerformed
+
+    private void jComboBox_MaLopHocActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox_MaLopHocActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jComboBox_MaLopHocActionPerformed
 
     /**
      * @param args the command line arguments
@@ -358,12 +402,15 @@ public class ReportFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton baoCaoBtn;
+    private javax.swing.JTable baoCaoTable;
     private javax.swing.JButton danhSachMonHocBtn;
     private javax.swing.JButton giangVienTheoBoMonBtn;
-    private javax.swing.JButton jButton7;
     private javax.swing.JComboBox<String> jComboBox_BoMon;
     private javax.swing.JComboBox<String> jComboBox_HocKi;
     private javax.swing.JComboBox<String> jComboBox_MaLopHoc;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
@@ -372,7 +419,6 @@ public class ReportFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTable jTable_BaoCao;
     private javax.swing.JComboBox<String> maGiangVienCb;
     private javax.swing.JButton phanCongGiaoVienHuongDanBtn;
     private javax.swing.JButton sinhVienTheoLopBtn;
@@ -387,6 +433,36 @@ public class ReportFrame extends javax.swing.JFrame {
             }
         } catch (SQLException ex) {
             Logger.getLogger(ReportFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    private void infileTest(JTable table, String tieuDe) {
+        int value;
+        File file = null;
+        value = jFileChooser1.showSaveDialog(null);
+        if (value == JFileChooser.APPROVE_OPTION) {
+            file = jFileChooser1.getSelectedFile();
+        }
+        LocalDate ld = LocalDate.now();
+        int day = ld.getDayOfMonth();
+        int month = ld.getMonthValue();
+        int year = ld.getYear();
+        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
+        String target = tieuDe;
+        PDFF.makePDF(file, target, ngaythangnam, table); 
+        openOnFly(file);
+    }  
+    
+    private void openOnFly(File file) {
+        if (Desktop.isDesktopSupported()) {
+            
+            try {
+                Desktop.getDesktop().open(file);
+            } catch (IOException ex) {
+                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println("No app or file to open");
+            }
+            
         }
     }
 
