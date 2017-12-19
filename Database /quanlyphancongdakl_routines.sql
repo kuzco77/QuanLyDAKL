@@ -223,6 +223,20 @@ SET character_set_client = utf8;
 SET character_set_client = @saved_cs_client;
 
 --
+-- Temporary view structure for view `tksogiotheogiangvientheomonhoc`
+--
+
+DROP TABLE IF EXISTS `tksogiotheogiangvientheomonhoc`;
+/*!50001 DROP VIEW IF EXISTS `tksogiotheogiangvientheomonhoc`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `tksogiotheogiangvientheomonhoc` AS SELECT 
+ 1 AS `Họ và tên`,
+ 1 AS `Tên học phần`,
+ 1 AS `Tổng số giờ`*/;
+SET character_set_client = @saved_cs_client;
+
+--
 -- Temporary view structure for view `tkgiangvientheohocvi`
 --
 
@@ -233,6 +247,20 @@ SET character_set_client = utf8;
 /*!50001 CREATE VIEW `tkgiangvientheohocvi` AS SELECT 
  1 AS `Học vị`,
  1 AS `Số lượng`*/;
+SET character_set_client = @saved_cs_client;
+
+--
+-- Temporary view structure for view `tksosinhvientheogiangvientheomonhoc`
+--
+
+DROP TABLE IF EXISTS `tksosinhvientheogiangvientheomonhoc`;
+/*!50001 DROP VIEW IF EXISTS `tksosinhvientheogiangvientheomonhoc`*/;
+SET @saved_cs_client     = @@character_set_client;
+SET character_set_client = utf8;
+/*!50001 CREATE VIEW `tksosinhvientheogiangvientheomonhoc` AS SELECT 
+ 1 AS `Họ và tên`,
+ 1 AS `Tên học phần`,
+ 1 AS `Tổng số sinh viên`*/;
 SET character_set_client = @saved_cs_client;
 
 --
@@ -509,6 +537,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 SET collation_connection      = @saved_col_connection */;
 
 --
+-- Final view structure for view `tksogiotheogiangvientheomonhoc`
+--
+
+/*!50001 DROP VIEW IF EXISTS `tksogiotheogiangvientheomonhoc`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `tksogiotheogiangvientheomonhoc` AS select `kk`.`hoTen` AS `Họ và tên`,`kk`.`tenHocPhan` AS `Tên học phần`,sum(`kk`.`gioQuyDoi`) AS `Tổng số giờ` from `kekhaiphanconghuongdan` `kk` group by `kk`.`maHocPhan`,`kk`.`maGiangVien`,`kk`.`hoTen` order by `kk`.`maGiangVien` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
 -- Final view structure for view `tkgiangvientheohocvi`
 --
 
@@ -522,6 +568,24 @@ SET character_set_client = @saved_cs_client;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
 /*!50001 VIEW `tkgiangvientheohocvi` AS select `gv`.`hocVi` AS `Học vị`,count(`gv`.`hocVi`) AS `Số lượng` from `giangvien` `gv` group by `gv`.`hocVi` */;
+/*!50001 SET character_set_client      = @saved_cs_client */;
+/*!50001 SET character_set_results     = @saved_cs_results */;
+/*!50001 SET collation_connection      = @saved_col_connection */;
+
+--
+-- Final view structure for view `tksosinhvientheogiangvientheomonhoc`
+--
+
+/*!50001 DROP VIEW IF EXISTS `tksosinhvientheogiangvientheomonhoc`*/;
+/*!50001 SET @saved_cs_client          = @@character_set_client */;
+/*!50001 SET @saved_cs_results         = @@character_set_results */;
+/*!50001 SET @saved_col_connection     = @@collation_connection */;
+/*!50001 SET character_set_client      = utf8 */;
+/*!50001 SET character_set_results     = utf8 */;
+/*!50001 SET collation_connection      = utf8_general_ci */;
+/*!50001 CREATE ALGORITHM=UNDEFINED */
+/*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
+/*!50001 VIEW `tksosinhvientheogiangvientheomonhoc` AS select `kk`.`hoTen` AS `Họ và tên`,`kk`.`tenHocPhan` AS `Tên học phần`,sum(`kk`.`soSinhVien`) AS `Tổng số sinh viên` from `kekhaiphanconghuongdan` `kk` group by `kk`.`maHocPhan`,`kk`.`maGiangVien`,`kk`.`hoTen` order by `kk`.`maGiangVien` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -684,11 +748,19 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `BaoCaoPCGVHuongDan`(in bien1 varchar(20),in bien2 int)
+CREATE DEFINER=`root`@`localhost` PROCEDURE `BaoCaoPCGVHuongDan`(
+	in maGiangVien varchar(20),
+    in hocKy int
+)
 BEGIN
-SELECT concat(gv.hoVaTenDem,' ',gv.ten) as'Họ Tên',pchd.maLop as'Mã lớp' FROM
-phanconghuongdan as pchd , giangvien as gv
-where gv.maGiangVien=bien1 and pchd.maGiangVien=gv.maGiangVien and pchd.hocKy=bien2;
+SELECT 	concat(gv.hoVaTenDem,' ',gv.ten) as'Họ Tên',
+		pchd.maLop as'Mã lớp' 
+FROM
+		phanconghuongdan as pchd,
+        giangvien as gv
+where 	gv.maGiangVien=maGiangVien 
+		and pchd.maGiangVien=gv.maGiangVien 
+        and pchd.hocKy=hocKy;
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -706,17 +778,15 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `BaoCaoSVTheoLop`(
-	in bien varchar(20) 
+	in keyword varchar(45)
 )
 BEGIN
-SELECT 	concat(gv.hoVaTenDem ,' ',gv.ten) as 'Họ và tên ',
-		hp.tenHocPhan as'Học Phần' 
-FROM 	phanconghuongdan as pchd,
-		giangvien as gv,
-        hocphan as hp
-where 	pchd.maGiangVien=gv.maGiangVien 
-		and pchd.maHocPhan=hp.maHocPhan 
-        and hp.maHocPhan=bien;
+select distinct sv.hoTen as 'Họ và tên'
+from chitietphanconghuongdan as ct, sinhVien as sv
+where ct.mssv like CONCAT('%', keyword, '%') 
+	or ct.maLop = keyword 
+    AND ct.mssv = sv.mssv;
+
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1154,7 +1224,8 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `themGiangVien`(
  in maGiangVien varchar(45),
- in hoTen nvarchar(45),
+ in hoVaTenDem nvarchar(45),
+ in ten nvarchar(10),
  in gioiTinh nvarchar(45),
  in hocHam nvarchar(45),
  in hocVi nvarchar(45),
@@ -1167,8 +1238,8 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `themGiangVien`(
 )
 BEGIN
 INSERT INTO `quanlyphancongdakl`.`giangVien` 
-(`maGiangVien`, `hoTen`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`, `email`, `diaChi`, `boMon`) 
-VALUES (maGiangVien, hoTen, gioiTinh, hocHam,  ngaySinh, dienThoai,  diaChi, boMon);
+(`maGiangVien`, `hoVaTenDem`, `ten`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`, `email`, `diaChi`, `boMon`) 
+VALUES (maGiangVien, hoVaTenDem, ten, gioiTinh, hocHam,  ngaySinh, dienThoai,  diaChi, boMon);
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -1511,14 +1582,21 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `timNCChiTietPhanCongHuongDan`(
 in keyword varchar(45)
 )
 BEGIN
-select * 
-from chitietphanconghuongdan as ct
+select ct.mssv as 'Mã số sinh viên',
+		sv.hoTen as 'Họ và tên',
+        ct.diemQuaTrinh as 'Điểm quá trình',
+        ct.diemThi as 'Điểm thi',
+        ct.tenBaoCao as 'Tên báo cáo',
+        ct.ngayNopBaoCao as 'Ngày nộp báo cáo'
+from chitietphanconghuongdan as ct, sinhvien as sv
 where ct.mssv like CONCAT('%', keyword, '%') 
 	or ct.maLop like CONCAT('%',keyword,'%') 
 	or ct.diemQuaTrinh like CONCAT('%',keyword,'%') 
 	or ct.diemThi like CONCAT('%',keyword,'%') 
 	or ct.tenBaoCao like CONCAT('%',keyword,'%') 
-	or ct.ngayNopBaoCao like CONCAT('%',keyword,'%') ;
+	or ct.ngayNopBaoCao like CONCAT('%',keyword,'%')
+    and ct.mssv = sv.mssv
+group by maLop, ct.mssv, sv.hoTen, diemQuaTrinh, diemThi, tenBaoCao, ngayNopBaoCao;
 
 END ;;
 DELIMITER ;
@@ -1941,4 +2019,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-12-14 20:21:22
+-- Dump completed on 2017-12-19  0:35:28

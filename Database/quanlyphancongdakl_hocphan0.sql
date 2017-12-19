@@ -16,28 +16,29 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `login`
+-- Table structure for table `hocphan`
 --
 
-DROP TABLE IF EXISTS `login`;
+DROP TABLE IF EXISTS `hocphan`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `login` (
-  `tenDangNhap` varchar(45) NOT NULL,
-  `matKhau` varchar(45) NOT NULL,
-  `loai` int(11) NOT NULL,
-  PRIMARY KEY (`tenDangNhap`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+CREATE TABLE `hocphan` (
+  `maHocPhan` varchar(10) NOT NULL,
+  `tenHocPhan` varchar(255) NOT NULL,
+  `tinChi` tinyint(2) NOT NULL,
+  `tinChiHocPhi` float NOT NULL,
+  PRIMARY KEY (`maHocPhan`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `login`
+-- Dumping data for table `hocphan`
 --
 
-LOCK TABLES `login` WRITE;
-/*!40000 ALTER TABLE `login` DISABLE KEYS */;
-INSERT INTO `login` VALUES ('admin','123456',1),('GV0001','123456',2),('GV0002','123456',2),('GV0003','123456',2),('GV0004','123456',2),('GV0005','123456',2),('GV0006','123456',2),('GV0007','123456',2),('GV0008','123456',2),('GV0009','123456',2),('GV0010','123456',2),('GV0011','123456',2),('GV0013','123456',2),('GV0014','123456',2);
-/*!40000 ALTER TABLE `login` ENABLE KEYS */;
+LOCK TABLES `hocphan` WRITE;
+/*!40000 ALTER TABLE `hocphan` DISABLE KEYS */;
+INSERT INTO `hocphan` VALUES ('IT3910','Project I',3,6),('IT3920','Project II',3,6),('IT3930','Project III',3,6),('IT3940','Đồ án tốt nghiệp',12,20),('IT3950','Đồ án tốt nghiệp',8,16);
+/*!40000 ALTER TABLE `hocphan` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 

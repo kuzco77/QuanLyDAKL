@@ -437,7 +437,7 @@ private static final String TEST = "test";
         thongTinMENU2.setFont(new java.awt.Font("Arial", 0, 14)); // NOI18N
         thongTinMENU2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         thongTinMENU2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/checkbox-resize.png"))); // NOI18N
-        thongTinMENU2.setText("Đồ án");
+        thongTinMENU2.setText("Chấm điểm");
         thongTinMENU2.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         thongTinMENU2.setIconTextGap(15);
         thongTinMENU2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
@@ -447,6 +447,9 @@ private static final String TEST = "test";
             }
         });
         thongTinMENU2.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                thongTinMENU2MouseClicked(evt);
+            }
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 thongTinMENU2MouseExited(evt);
             }
@@ -1008,7 +1011,8 @@ private static final String TEST = "test";
     }//GEN-LAST:event_thongTinTaiKhoanMENUITEMMouseMoved
 
     private void thongTinTaiKhoanMENUITEMMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinTaiKhoanMENUITEMMouseClicked
-        // tạo 1 form đầy đủ thông tin
+        InfoAccount frame = new InfoAccount(maNguoiDung, tenNguoiDungTF.getText(), quyenTF.getText());
+        frame.setVisible(true);
 
     }//GEN-LAST:event_thongTinTaiKhoanMENUITEMMouseClicked
 
@@ -1195,6 +1199,11 @@ private static final String TEST = "test";
         ReportFrame frame = new ReportFrame();
         frame.setVisible(true);
     }//GEN-LAST:event_baoCaoMENUMouseClicked
+
+    private void thongTinMENU2MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_thongTinMENU2MouseClicked
+        InfoAssignmentForClass frame = new InfoAssignmentForClass(maNguoiDung);
+        frame.setVisible(true);
+    }//GEN-LAST:event_thongTinMENU2MouseClicked
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);

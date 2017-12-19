@@ -158,13 +158,13 @@ public class InfoTeacher extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        chucVuTF = new javax.swing.JTextField();
+        chucVuTf = new javax.swing.JTextField();
         dienThoaiTF = new javax.swing.JTextField();
         emailTF = new javax.swing.JTextField();
         diaChiTF = new javax.swing.JTextField();
         boMonTF = new javax.swing.JTextField();
-        jDateChooser_NgaySinh = new com.toedter.calendar.JDateChooser();
-        jTextField_TenGiangVien = new javax.swing.JTextField();
+        ngaySinhTf = new com.toedter.calendar.JDateChooser();
+        tenTf = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         themBtn = new javax.swing.JButton();
         suaBtn = new javax.swing.JButton();
@@ -266,7 +266,7 @@ public class InfoTeacher extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel12.setText("Bộ môn:");
 
-        chucVuTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        chucVuTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         dienThoaiTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -276,9 +276,9 @@ public class InfoTeacher extends javax.swing.JFrame {
 
         boMonTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        jDateChooser_NgaySinh.setDateFormatString("yyyy-MM-dd\n");
+        ngaySinhTf.setDateFormatString("yyyy-MM-dd\n");
 
-        jTextField_TenGiangVien.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        tenTf.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel13.setText("Tên:");
@@ -318,7 +318,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(maGiangVienTf)
-                                    .addComponent(jTextField_TenGiangVien)
+                                    .addComponent(tenTf)
                                     .addComponent(hoVaTenDemTF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -338,7 +338,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                                         .addGap(18, 18, 18)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chucVuTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(chucVuTf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(diaChiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(boMonTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -346,7 +346,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(ngaySinhTf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addGap(104, 104, 104)))
                 .addContainerGap())
         );
@@ -367,12 +367,12 @@ public class InfoTeacher extends javax.swing.JFrame {
                                     .addComponent(jLabel6)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(ngaySinhTf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chucVuTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chucVuTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -384,7 +384,7 @@ public class InfoTeacher extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(jTextField_TenGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(tenTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGap(43, 43, 43)
@@ -542,27 +542,42 @@ public class InfoTeacher extends javax.swing.JFrame {
 
     private void themBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themBtnActionPerformed
         // TODO add your handling code here:
-        date=jDateChooser_NgaySinh.getDate();
+        date=ngaySinhTf.getDate();
         sqldate=new java.sql.Date(date.getTime());
-        String query="INSERT INTO `quanlyphancongdakl`.`giangvien` "
-                + "(`maGiangVien`, `hoVaTenDem`,`ten`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`"
-                + ", `email`, `diaChi`, `boMon`)"
-                + " VALUES ("
-                + "'"+maGiangVienTf.getText()+"', "
-                + "'"+hoVaTenDemTF.getText()+"',"
-                + "'"+jTextField_TenGiangVien.getText()+"',"
-                + " '"+gioiTinhTF.getText()+"',"
-                + " '"+hocHamTF.getText()+"',"
-                + " '"+hocViTF.getText()+"',"
-                + " '"+sqldate+"',"
-                + " '"+chucVuTF.getText()+"',"
-                + " '"+dienThoaiTF.getText()+"', "
-                + "'"+emailTF.getText()+"',"
-                + " '"+diaChiTF.getText()+"', "
-                + "'"+boMonTF.getText()+"');";
-        executeSQLquery(query, "Insert");
+//        String query="INSERT INTO `quanlyphancongdakl`.`giangvien` "
+//                + "(`maGiangVien`, `hoVaTenDem`,`ten`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`"
+//                + ", `email`, `diaChi`, `boMon`)"
+//                + " VALUES ("
+//                + "'"+maGiangVienTf.getText()+"', "
+//                + "'"+hoVaTenDemTF.getText()+"',"
+//                + "'"+tenTf.getText()+"',"
+//                + " '"+gioiTinhTF.getText()+"',"
+//                + " '"+hocHamTF.getText()+"',"
+//                + " '"+hocViTF.getText()+"',"
+//                + " '"+sqldate+"',"
+//                + " '"+chucVuTf.getText()+"',"
+//                + " '"+dienThoaiTF.getText()+"', "
+//                + "'"+emailTF.getText()+"',"
+//                + " '"+diaChiTF.getText()+"', "
+//                + "'"+boMonTF.getText()+"');";
+//        executeSQLquery(query, "Insert");
         
-        
+        String blankSql = "call quanlyphancongdakl.themGiangVien('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')";
+        String sqlSql = String.format(blankSql, 
+                maGiangVienTf.getText(),
+                hoVaTenDemTF.getText(),
+                tenTf.getText(),
+                gioiTinhTF.getText(),
+                hocHamTF.getText(),
+                hocViTF.getText(),
+                sqldate,
+                chucVuTf.getText(),
+                dienThoaiTF.getText(),
+                emailTF.getText(),
+                diaChiTF.getText(),
+                boMonTF.getText()      
+        );
+        ServiceModel.getResultSetFromSQLQuery(blankSql, "hello");
         
         String blankQuery = "call themLogin('%s', '%s', 2)";
         String sqlQuery = String.format(blankQuery,
@@ -590,12 +605,12 @@ public class InfoTeacher extends javax.swing.JFrame {
     private void Huy(){
         maGiangVienTf.setText(null);
         hoVaTenDemTF.setText(null);
-        jTextField_TenGiangVien.setText(null);
+        tenTf.setText(null);
         gioiTinhTF.setText(null);
         hocHamTF.setText(null);
         hocViTF.setText(null);
-        jDateChooser_NgaySinh.setDate(null);
-        chucVuTF.setText(null);
+        ngaySinhTf.setDate(null);
+        chucVuTf.setText(null);
         dienThoaiTF.setText(null);
         emailTF.setText(null);
         diaChiTF.setText(null);
@@ -621,17 +636,17 @@ public class InfoTeacher extends javax.swing.JFrame {
 
     private void suaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaBtnActionPerformed
         // TODO add your handling code here:
-        date=jDateChooser_NgaySinh.getDate();
+        date=ngaySinhTf.getDate();
         sqldate=new java.sql.Date(date.getTime());
         String query ="UPDATE `quanlyphancongdakl`.`giangvien`"
                 + " SET `maGiangVien`='"+maGiangVienTf.getText()+"', "
                 + "`hoVaTenDem`='"+hoVaTenDemTF.getText()+"', "
-                + "`ten`='"+jTextField_TenGiangVien.getText()+"', "
+                + "`ten`='"+tenTf.getText()+"', "
                 + "`gioiTinh`='"+gioiTinhTF.getText()+"',"
                 + " `hocHam`='"+hocHamTF.getText()+"',"
                 + " `hocVi`='"+hocViTF.getText()+"', `"
                 + "ngaySinh`='"+sqldate+"', "
-                + "`chucVu`='"+chucVuTF.getText()+"',"
+                + "`chucVu`='"+chucVuTf.getText()+"',"
                 + " `dienThoai`='"+dienThoaiTF.getText()+"', "
                 + "`email`='"+emailTF.getText()+"', "
                 + "`diaChi`='"+diaChiTF.getText()+"', "
@@ -648,12 +663,12 @@ public class InfoTeacher extends javax.swing.JFrame {
             Date date=new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 6).toString());
             maGiangVienTf.setText(model.getValueAt(i, 0).toString());
             hoVaTenDemTF.setText(model.getValueAt(i, 1).toString());
-            jTextField_TenGiangVien.setText(model.getValueAt(i, 2).toString());
+            tenTf.setText(model.getValueAt(i, 2).toString());
             gioiTinhTF.setText(model.getValueAt(i, 3).toString());
             hocHamTF.setText(model.getValueAt(i, 4).toString());
             hocViTF.setText(model.getValueAt(i, 5).toString());
-            jDateChooser_NgaySinh.setDate(date);
-            chucVuTF.setText(model.getValueAt(i, 7).toString());
+            ngaySinhTf.setDate(date);
+            chucVuTf.setText(model.getValueAt(i, 7).toString());
             dienThoaiTF.setText(model.getValueAt(i, 8).toString());
             emailTF.setText(model.getValueAt(i, 9).toString());
             diaChiTF.setText(model.getValueAt(i, 10).toString());
@@ -744,7 +759,7 @@ public class InfoTeacher extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField boMonTF;
-    private javax.swing.JTextField chucVuTF;
+    private javax.swing.JTextField chucVuTf;
     private javax.swing.JTextField diaChiTF;
     private javax.swing.JTextField dienThoaiTF;
     private javax.swing.JTextField emailTF;
@@ -754,7 +769,6 @@ public class InfoTeacher extends javax.swing.JFrame {
     private javax.swing.JTextField hocHamTF;
     private javax.swing.JTextField hocViTF;
     private javax.swing.JButton huyBtn;
-    private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
     private javax.swing.JDialog jDialog1;
     private javax.swing.JFileChooser jFileChooser1;
     private javax.swing.JLabel jLabel1;
@@ -774,10 +788,11 @@ public class InfoTeacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JTextField jTextField_TenGiangVien;
     private javax.swing.JTextField maGiangVienTf;
+    private com.toedter.calendar.JDateChooser ngaySinhTf;
     private javax.swing.JButton nhapTuFileBtn;
     private javax.swing.JButton suaBtn;
+    private javax.swing.JTextField tenTf;
     private javax.swing.JButton themBtn;
     private javax.swing.JButton xoaBtn;
     private javax.swing.JButton xuatBaoCaoBtn;
