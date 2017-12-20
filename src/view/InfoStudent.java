@@ -78,7 +78,7 @@ public class InfoStudent extends javax.swing.JFrame {
                 danhsachsinhvien.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoTeacher2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return danhsachsinhvien;
     }

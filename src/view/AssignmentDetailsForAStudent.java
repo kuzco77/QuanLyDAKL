@@ -124,7 +124,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
         maLopTf.setEditable(false);
         getContentPane().setBackground(Color.white);
         setLocationRelativeTo(null);
-        setTitle("Phân công đồ án- khối lượng môn học cho sinh viên");
+        setTitle("Phân công đồ án - khối lượng môn học cho sinh viên");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         this.setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         updateTable();
@@ -154,7 +154,7 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                 danhsachCTHD.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoTeacher2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return danhsachCTHD;
     }
@@ -484,7 +484,12 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                 diemThiTf.getText(),
                 tenBaoCaoTf.getText(),
                 sqldate.toString());
-                ServiceModel.getResultSetFromSQLQuery(sqlQuery, "sua chi tiet huong dan");
+               try {
+                   ServiceModel.getResultSetFromSQLQuery(sqlQuery, "sua chi tiet huong dan");
+               } catch (SQLException ex) {
+                   System.out.println("Lỗi khi sửa");
+                   Logger.getLogger(AssignmentDetailsForAStudent.class.getName()).log(Level.SEVERE, null, ex);
+               }
                 updateTable();
                 JOptionPane.showMessageDialog(rootPane, "Sửa thành công");
            } 
@@ -509,7 +514,12 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                 diemThiTf.getText(),
                 tenBaoCaoTf.getText(),
                 sqldate.toString());
-                ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them chi tiet huong dan");
+               try {
+                   ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them chi tiet huong dan");
+               } catch (SQLException ex) {
+                   System.out.println("Lỗi khi sửa");
+                   Logger.getLogger(AssignmentDetailsForAStudent.class.getName()).log(Level.SEVERE, null, ex);
+               }
                 updateTable();
                 JOptionPane.showMessageDialog(rootPane, "Thêm thành công");
            } 
@@ -558,7 +568,12 @@ public class AssignmentDetailsForAStudent extends javax.swing.JFrame {
                 String sqlQuery = String.format(blankQuery,
                 mssvTf.getText(),
                 maLopTf.getText());
-                ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them chi tiet huong dan");
+               try {
+                   ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them chi tiet huong dan");
+               } catch (SQLException ex) {
+                   System.out.println("Lỗi khi thêm");
+                   Logger.getLogger(AssignmentDetailsForAStudent.class.getName()).log(Level.SEVERE, null, ex);
+               }
                 updateTable();
                 JOptionPane.showMessageDialog(rootPane, " thành công");
            } 

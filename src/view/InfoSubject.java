@@ -66,7 +66,7 @@ public class InfoSubject extends javax.swing.JFrame {
                 danhsachhp.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoTeacher2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return danhsachhp;
     }
@@ -153,6 +153,9 @@ public class InfoSubject extends javax.swing.JFrame {
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setText("Thông tin học phần");
@@ -365,7 +368,12 @@ public class InfoSubject extends javax.swing.JFrame {
                 soTinChiTf.getText(),
                 soTinChiHocPhiTf.getText()
         );
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi khi sửa");
+            Logger.getLogger(InfoSubject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
     }//GEN-LAST:event_suabtnActionPerformed
 
@@ -378,7 +386,12 @@ public class InfoSubject extends javax.swing.JFrame {
                 soTinChiTf.getText(),
                 soTinChiHocPhiTf.getText()
         );
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi khi thêm");
+            Logger.getLogger(InfoSubject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
     }//GEN-LAST:event_themBtnActionPerformed
 
@@ -388,7 +401,12 @@ public class InfoSubject extends javax.swing.JFrame {
         String sqlQuery = String.format(blankQuery, 
                 maHocPhanTf.getText()
         );
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "hello");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi khi xoá");
+            Logger.getLogger(InfoSubject.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
     }//GEN-LAST:event_jButton3ActionPerformed
 

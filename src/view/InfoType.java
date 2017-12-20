@@ -66,7 +66,7 @@ public class InfoType extends javax.swing.JFrame {
                 danhsachType.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoTeacher2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return danhsachType;
     }
@@ -361,7 +361,12 @@ public class InfoType extends javax.swing.JFrame {
                 nhomLoaiHinhTf.getText(),
                 kcTf.getText()
         );
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi khi xoá");
+            Logger.getLogger(InfoType.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
     }//GEN-LAST:event_themBtnActionPerformed
 
@@ -373,7 +378,12 @@ public class InfoType extends javax.swing.JFrame {
                 nhomLoaiHinhTf.getText(),
                 kcTf.getText()
         );
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        } catch (SQLException ex) {
+            System.out.println("Lôi khi xoá");
+            Logger.getLogger(InfoType.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
     }//GEN-LAST:event_suaBtnActionPerformed
 
@@ -381,7 +391,12 @@ public class InfoType extends javax.swing.JFrame {
         // TODO add your handling code here:
         String blankQuery = "call xoaLoaiHinh('%s')";
         String sqlQuery = String.format(blankQuery, maLoaiHinhTf.getText());
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "Xoá loại hình");
+        } catch (SQLException ex) {
+            System.out.println("Lỗi khi xoá");
+            Logger.getLogger(InfoType.class.getName()).log(Level.SEVERE, null, ex);
+        }
         updateTable();
    
     }//GEN-LAST:event_xoaBtnActionPerformed

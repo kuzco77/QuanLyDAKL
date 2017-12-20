@@ -6,6 +6,9 @@
 package view;
 
 import java.awt.Toolkit;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.ServiceModel;
 
@@ -181,7 +184,12 @@ public class ChangePassword extends javax.swing.JFrame {
                         nguoiDung,
                         xacNhanMatKhauTf.getText()
                 );
-                ServiceModel.getResultSetFromSQLQuery(sqlQuery, "doi mat khau");
+                try {
+                    ServiceModel.getResultSetFromSQLQuery(sqlQuery, "doi mat khau");
+                } catch (SQLException ex) {
+                    System.out.println(ex);
+                    Logger.getLogger(ChangePassword.class.getName()).log(Level.SEVERE, null, ex);
+                }
                 JOptionPane.showMessageDialog(rootPane, "Đổi mật khẩu thành công");
                 this.dispose();
             } else {

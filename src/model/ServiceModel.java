@@ -21,17 +21,13 @@ import javax.swing.table.DefaultTableModel;
  * @author chunamanh
  */
 public class ServiceModel {
-    static public ResultSet getResultSetFromSQLQuery(String query, String message) {
+    static public ResultSet getResultSetFromSQLQuery(String query, String message) throws SQLException {
         System.out.println("Execute query: " + query);
         Connection conn=getJDBCConnection();
         Statement st;
         ResultSet rs = null;
-        try {
-            st=conn.createStatement();
-            rs = st.executeQuery(query);
-        } catch (Exception ex) {
-           ex.printStackTrace();
-        }
+        st=conn.createStatement();
+        rs = st.executeQuery(query);
         return rs;
     }
     

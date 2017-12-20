@@ -5,27 +5,22 @@
  */
 package view;
 
-import PDF.PDFF;
 import conn.ConnectionToDatabase;
 import static conn.ConnectionToDatabase.getJDBCConnection;
-import java.awt.Desktop;
+import java.awt.Color;
 import java.awt.Toolkit;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.Vector;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 import javax.swing.table.DefaultTableModel;
@@ -46,6 +41,8 @@ public class InfoTeacher extends javax.swing.JFrame {
     java.sql.Date sqldate;
     public InfoTeacher() {
         initComponents();
+//        getContentPane().setBackground(Color.white);
+//        jPanel2.setBackground(Color.white);
         showtt_GiaoVien_totable();
         setLocationRelativeTo(null);
         setTitle("Thông tin giảng viên");
@@ -98,7 +95,7 @@ public class InfoTeacher extends javax.swing.JFrame {
             if((st.executeUpdate(query))==1)
             {
                 // refresh jatable data
-                DefaultTableModel model=(DefaultTableModel)giangVienTable.getModel();
+                DefaultTableModel model=(DefaultTableModel)jTable_gv.getModel();
                 // ham nay dung de reset lai toan bo du lieu nhe
                 model.setRowCount(0);
                 showtt_GiaoVien_totable();
@@ -114,7 +111,7 @@ public class InfoTeacher extends javax.swing.JFrame {
     public void showtt_GiaoVien_totable(){
         ArrayList<BangGiaoVien> list=getListGiaoVien();
         // gọi đến bảng
-        DefaultTableModel model=(DefaultTableModel)giangVienTable.getModel();
+        DefaultTableModel model=(DefaultTableModel)jTable_gv.getModel();
         Object[] row=new Object[12];
         for(int i=0;i<list.size();i++){
             row[0]=list.get(i).getMagv();
@@ -136,8 +133,6 @@ public class InfoTeacher extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
-        jFileChooser1 = new javax.swing.JFileChooser();
         jPanel1 = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
@@ -158,13 +153,13 @@ public class InfoTeacher extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         jLabel12 = new javax.swing.JLabel();
-        chucVuTf = new javax.swing.JTextField();
+        chucVuTF = new javax.swing.JTextField();
         dienThoaiTF = new javax.swing.JTextField();
         emailTF = new javax.swing.JTextField();
         diaChiTF = new javax.swing.JTextField();
         boMonTF = new javax.swing.JTextField();
-        ngaySinhTf = new com.toedter.calendar.JDateChooser();
-        tenTf = new javax.swing.JTextField();
+        jDateChooser_NgaySinh = new com.toedter.calendar.JDateChooser();
+        jTextField_TenGiangVien = new javax.swing.JTextField();
         jLabel13 = new javax.swing.JLabel();
         themBtn = new javax.swing.JButton();
         suaBtn = new javax.swing.JButton();
@@ -173,31 +168,19 @@ public class InfoTeacher extends javax.swing.JFrame {
         xuatBaoCaoBtn = new javax.swing.JButton();
         nhapTuFileBtn = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        giangVienTable = new javax.swing.JTable();
-
-        javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
-        jDialog1.getContentPane().setLayout(jDialog1Layout);
-        jDialog1Layout.setHorizontalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jDialog1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-        );
-        jDialog1Layout.setVerticalGroup(
-            jDialog1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jDialog1Layout.createSequentialGroup()
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(jFileChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
+        jTable_gv = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(255, 255, 255));
         addWindowListener(new java.awt.event.WindowAdapter() {
             public void windowOpened(java.awt.event.WindowEvent evt) {
                 formWindowOpened(evt);
             }
         });
+
+        jPanel1.setBackground(new java.awt.Color(255, 255, 255));
+
+        jPanel2.setBackground(new java.awt.Color(255, 255, 255));
 
         jLabel1.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -266,7 +249,7 @@ public class InfoTeacher extends javax.swing.JFrame {
         jLabel12.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel12.setText("Bộ môn:");
 
-        chucVuTf.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
+        chucVuTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         dienThoaiTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
@@ -276,9 +259,7 @@ public class InfoTeacher extends javax.swing.JFrame {
 
         boMonTF.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
-        ngaySinhTf.setDateFormatString("yyyy-MM-dd\n");
-
-        tenTf.setFont(new java.awt.Font("Times New Roman", 0, 12)); // NOI18N
+        jTextField_TenGiangVien.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
 
         jLabel13.setFont(new java.awt.Font("Arial", 0, 18)); // NOI18N
         jLabel13.setText("Tên:");
@@ -318,35 +299,28 @@ public class InfoTeacher extends javax.swing.JFrame {
                                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(maGiangVienTf)
-                                    .addComponent(tenTf)
+                                    .addComponent(jTextField_TenGiangVien)
                                     .addComponent(hoVaTenDemTF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, 211, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 124, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addGap(124, 124, 124)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel9)
-                                            .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(45, 45, 45))
-                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                            .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGap(18, 18, 18)))
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(chucVuTf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(diaChiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(boMonTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(ngaySinhTf, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(jLabel9)
+                                        .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 86, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGap(45, 45, 45)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                        .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(chucVuTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(diaChiTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(boMonTF, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(104, 104, 104)))
                 .addContainerGap())
         );
@@ -367,12 +341,12 @@ public class InfoTeacher extends javax.swing.JFrame {
                                     .addComponent(jLabel6)))
                             .addGroup(jPanel2Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(ngaySinhTf, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(jDateChooser_NgaySinh, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(23, 23, 23)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(chucVuTf, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(chucVuTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel8)))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -384,30 +358,34 @@ public class InfoTeacher extends javax.swing.JFrame {
                     .addComponent(jLabel9)
                     .addComponent(dienThoaiTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel13)
-                    .addComponent(tenTf, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jTextField_TenGiangVien, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(43, 43, 43)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel10))
+                        .addGap(20, 20, 20)
+                        .addComponent(emailTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(boMonTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel12))
                         .addGap(34, 34, 34))
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel4))
-                        .addGap(20, 20, 20)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(gioiTinhTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel4))
+                                .addGap(20, 20, 20))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(18, 18, 18)
+                                .addComponent(jLabel10)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hocHamTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel5)
                             .addComponent(diaChiTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel11))
-                        .addGap(40, 40, 40)
+                        .addGap(20, 20, 20)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(hocViTF, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7))
@@ -453,17 +431,12 @@ public class InfoTeacher extends javax.swing.JFrame {
         xuatBaoCaoBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         xuatBaoCaoBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/print-resize.png"))); // NOI18N
         xuatBaoCaoBtn.setText("Xuất báo cáo");
-        xuatBaoCaoBtn.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                xuatBaoCaoBtnActionPerformed(evt);
-            }
-        });
 
         nhapTuFileBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         nhapTuFileBtn.setIcon(new javax.swing.ImageIcon(getClass().getResource("/icon/explorer-resize.png"))); // NOI18N
         nhapTuFileBtn.setText("Nhập từ file");
 
-        giangVienTable.setModel(new javax.swing.table.DefaultTableModel(
+        jTable_gv.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -471,12 +444,12 @@ public class InfoTeacher extends javax.swing.JFrame {
                 "Mã giảng Viên", "Họ", "Tên", "Giới Tính", "Học hàm", "Học vị", "Ngày Sinh", "Chức vụ", "Điện thoai", "Email", "Địa chỉ", "Bộ môn"
             }
         ));
-        giangVienTable.addMouseListener(new java.awt.event.MouseAdapter() {
+        jTable_gv.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
-                giangVienTableMouseClicked(evt);
+                jTable_gvMouseClicked(evt);
             }
         });
-        jScrollPane2.setViewportView(giangVienTable);
+        jScrollPane2.setViewportView(jTable_gv);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -484,27 +457,27 @@ public class InfoTeacher extends javax.swing.JFrame {
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(xuatBaoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(56, 56, 56)
-                        .addComponent(nhapTuFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 200, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addComponent(themBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(113, 113, 113)
-                        .addComponent(suaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(116, 116, 116)
-                        .addComponent(xoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(133, 133, 133)
-                        .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addComponent(themBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(113, 113, 113)
+                .addComponent(suaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(116, 116, 116)
+                .addComponent(xoaBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(133, 133, 133)
+                .addComponent(huyBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 125, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 931, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 955, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(0, 1, Short.MAX_VALUE))
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(xuatBaoCaoBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 175, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(69, 69, 69)
+                .addComponent(nhapTuFileBtn, javax.swing.GroupLayout.PREFERRED_SIZE, 186, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(44, 44, 44))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -518,12 +491,12 @@ public class InfoTeacher extends javax.swing.JFrame {
                     .addComponent(xoaBtn)
                     .addComponent(huyBtn))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(14, 14, 14)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 202, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(xuatBaoCaoBtn)
                     .addComponent(nhapTuFileBtn))
-                .addContainerGap(16, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -542,49 +515,36 @@ public class InfoTeacher extends javax.swing.JFrame {
 
     private void themBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_themBtnActionPerformed
         // TODO add your handling code here:
-        date=ngaySinhTf.getDate();
+        date=jDateChooser_NgaySinh.getDate();
         sqldate=new java.sql.Date(date.getTime());
-//        String query="INSERT INTO `quanlyphancongdakl`.`giangvien` "
-//                + "(`maGiangVien`, `hoVaTenDem`,`ten`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`"
-//                + ", `email`, `diaChi`, `boMon`)"
-//                + " VALUES ("
-//                + "'"+maGiangVienTf.getText()+"', "
-//                + "'"+hoVaTenDemTF.getText()+"',"
-//                + "'"+tenTf.getText()+"',"
-//                + " '"+gioiTinhTF.getText()+"',"
-//                + " '"+hocHamTF.getText()+"',"
-//                + " '"+hocViTF.getText()+"',"
-//                + " '"+sqldate+"',"
-//                + " '"+chucVuTf.getText()+"',"
-//                + " '"+dienThoaiTF.getText()+"', "
-//                + "'"+emailTF.getText()+"',"
-//                + " '"+diaChiTF.getText()+"', "
-//                + "'"+boMonTF.getText()+"');";
-//        executeSQLquery(query, "Insert");
-        
-        String blankSql = "call quanlyphancongdakl.themGiangVien('%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s', '%s')";
-        String sqlSql = String.format(blankSql, 
-                maGiangVienTf.getText(),
-                hoVaTenDemTF.getText(),
-                tenTf.getText(),
-                gioiTinhTF.getText(),
-                hocHamTF.getText(),
-                hocViTF.getText(),
-                sqldate,
-                chucVuTf.getText(),
-                dienThoaiTF.getText(),
-                emailTF.getText(),
-                diaChiTF.getText(),
-                boMonTF.getText()      
-        );
-        ServiceModel.getResultSetFromSQLQuery(blankSql, "hello");
+        String query="INSERT INTO `quanlyphancongdakl`.`giangvien` "
+                + "(`maGiangVien`, `hoVaTenDem`,`ten`, `gioiTinh`, `hocHam`, `hocVi`, `ngaySinh`, `chucVu`, `dienThoai`"
+                + ", `email`, `diaChi`, `boMon`)"
+                + " VALUES ("
+                + "'"+maGiangVienTf.getText()+"', "
+                + "'"+hoVaTenDemTF.getText()+"',"
+                + "'"+jTextField_TenGiangVien.getText()+"',"
+                + " '"+gioiTinhTF.getText()+"',"
+                + " '"+hocHamTF.getText()+"',"
+                + " '"+hocViTF.getText()+"',"
+                + " '"+sqldate+"',"
+                + " '"+chucVuTF.getText()+"',"
+                + " '"+dienThoaiTF.getText()+"', "
+                + "'"+emailTF.getText()+"',"
+                + " '"+diaChiTF.getText()+"', "
+                + "'"+boMonTF.getText()+"');";
+        executeSQLquery(query, "Insert");
         
         String blankQuery = "call themLogin('%s', '%s', 2)";
         String sqlQuery = String.format(blankQuery,
                 maGiangVienTf.getText(),
                 "123456");
-        ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them tai khoan");
-        updateTable();
+        try {
+            ServiceModel.getResultSetFromSQLQuery(sqlQuery, "them tai khoan");
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(rootPane, "Lỗi khi thêm");
+            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);         
+        }
     }//GEN-LAST:event_themBtnActionPerformed
   
     private void hocViTFActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_hocViTFActionPerformed
@@ -605,12 +565,12 @@ public class InfoTeacher extends javax.swing.JFrame {
     private void Huy(){
         maGiangVienTf.setText(null);
         hoVaTenDemTF.setText(null);
-        tenTf.setText(null);
+        jTextField_TenGiangVien.setText(null);
         gioiTinhTF.setText(null);
         hocHamTF.setText(null);
         hocViTF.setText(null);
-        ngaySinhTf.setDate(null);
-        chucVuTf.setText(null);
+        jDateChooser_NgaySinh.setDate(null);
+        chucVuTF.setText(null);
         dienThoaiTF.setText(null);
         emailTF.setText(null);
         diaChiTF.setText(null);
@@ -636,17 +596,17 @@ public class InfoTeacher extends javax.swing.JFrame {
 
     private void suaBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_suaBtnActionPerformed
         // TODO add your handling code here:
-        date=ngaySinhTf.getDate();
+        date=jDateChooser_NgaySinh.getDate();
         sqldate=new java.sql.Date(date.getTime());
         String query ="UPDATE `quanlyphancongdakl`.`giangvien`"
                 + " SET `maGiangVien`='"+maGiangVienTf.getText()+"', "
                 + "`hoVaTenDem`='"+hoVaTenDemTF.getText()+"', "
-                + "`ten`='"+tenTf.getText()+"', "
+                + "`ten`='"+jTextField_TenGiangVien.getText()+"', "
                 + "`gioiTinh`='"+gioiTinhTF.getText()+"',"
                 + " `hocHam`='"+hocHamTF.getText()+"',"
                 + " `hocVi`='"+hocViTF.getText()+"', `"
                 + "ngaySinh`='"+sqldate+"', "
-                + "`chucVu`='"+chucVuTf.getText()+"',"
+                + "`chucVu`='"+chucVuTF.getText()+"',"
                 + " `dienThoai`='"+dienThoaiTF.getText()+"', "
                 + "`email`='"+emailTF.getText()+"', "
                 + "`diaChi`='"+diaChiTF.getText()+"', "
@@ -655,20 +615,20 @@ public class InfoTeacher extends javax.swing.JFrame {
         executeSQLquery(query, "Update");
     }//GEN-LAST:event_suaBtnActionPerformed
 
-    private void giangVienTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_giangVienTableMouseClicked
+    private void jTable_gvMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_gvMouseClicked
         // TODO add your handling code here:
-        DefaultTableModel model=(DefaultTableModel) giangVienTable.getModel();
-        int i=giangVienTable.getSelectedRow();
+        DefaultTableModel model=(DefaultTableModel) jTable_gv.getModel();
+        int i=jTable_gv.getSelectedRow();
         try {
             Date date=new SimpleDateFormat("yyyy-MM-dd").parse((String)model.getValueAt(i, 6).toString());
             maGiangVienTf.setText(model.getValueAt(i, 0).toString());
             hoVaTenDemTF.setText(model.getValueAt(i, 1).toString());
-            tenTf.setText(model.getValueAt(i, 2).toString());
+            jTextField_TenGiangVien.setText(model.getValueAt(i, 2).toString());
             gioiTinhTF.setText(model.getValueAt(i, 3).toString());
             hocHamTF.setText(model.getValueAt(i, 4).toString());
             hocViTF.setText(model.getValueAt(i, 5).toString());
-            ngaySinhTf.setDate(date);
-            chucVuTf.setText(model.getValueAt(i, 7).toString());
+            jDateChooser_NgaySinh.setDate(date);
+            chucVuTF.setText(model.getValueAt(i, 7).toString());
             dienThoaiTF.setText(model.getValueAt(i, 8).toString());
             emailTF.setText(model.getValueAt(i, 9).toString());
             diaChiTF.setText(model.getValueAt(i, 10).toString());
@@ -677,41 +637,8 @@ public class InfoTeacher extends javax.swing.JFrame {
         } catch (ParseException ex) {
             Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }//GEN-LAST:event_giangVienTableMouseClicked
+    }//GEN-LAST:event_jTable_gvMouseClicked
 
-    private void xuatBaoCaoBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_xuatBaoCaoBtnActionPerformed
-        infileTest();
-    }//GEN-LAST:event_xuatBaoCaoBtnActionPerformed
-
-    private void infileTest() {
-        int value;
-        File file = null;
-        value = jFileChooser1.showSaveDialog(null);
-        if (value == JFileChooser.APPROVE_OPTION) {
-            file = jFileChooser1.getSelectedFile();
-        }
-        LocalDate ld = LocalDate.now();
-        int day = ld.getDayOfMonth();
-        int month = ld.getMonthValue();
-        int year = ld.getYear();
-        String ngaythangnam = "Ngày " + day + " tháng " + month + " năm " + year;
-        String target = "Danh sách giảng viên";
-        PDFF.makePDF(file, target, ngaythangnam, giangVienTable);
-        openOnFly(file);
-    }
-    
-    private void openOnFly(File file) {
-        if (Desktop.isDesktopSupported()) {
-            
-            try {
-                Desktop.getDesktop().open(file);
-            } catch (IOException ex) {
-                Logger.getLogger(InfoStudent.class.getName()).log(Level.SEVERE, null, ex);
-                System.out.println("No app or file to open");
-            }
-            
-        }
-    }
     /**
      * @param args the command line arguments
      */
@@ -746,31 +673,19 @@ public class InfoTeacher extends javax.swing.JFrame {
             }
         });
     }
-    
-    private void updateTable() {
-        try {
-            String blankQuery = "call timNCGiangVien('')";
-            DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(blankQuery, "hello");
-            giangVienTable.setModel(model);
-        } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField boMonTF;
-    private javax.swing.JTextField chucVuTf;
+    private javax.swing.JTextField chucVuTF;
     private javax.swing.JTextField diaChiTF;
     private javax.swing.JTextField dienThoaiTF;
     private javax.swing.JTextField emailTF;
-    private javax.swing.JTable giangVienTable;
     private javax.swing.JTextField gioiTinhTF;
     private javax.swing.JTextField hoVaTenDemTF;
     private javax.swing.JTextField hocHamTF;
     private javax.swing.JTextField hocViTF;
     private javax.swing.JButton huyBtn;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JFileChooser jFileChooser1;
+    private com.toedter.calendar.JDateChooser jDateChooser_NgaySinh;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -788,11 +703,11 @@ public class InfoTeacher extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JSeparator jSeparator1;
+    private javax.swing.JTable jTable_gv;
+    private javax.swing.JTextField jTextField_TenGiangVien;
     private javax.swing.JTextField maGiangVienTf;
-    private com.toedter.calendar.JDateChooser ngaySinhTf;
     private javax.swing.JButton nhapTuFileBtn;
     private javax.swing.JButton suaBtn;
-    private javax.swing.JTextField tenTf;
     private javax.swing.JButton themBtn;
     private javax.swing.JButton xoaBtn;
     private javax.swing.JButton xuatBaoCaoBtn;

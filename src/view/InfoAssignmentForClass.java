@@ -114,7 +114,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
                 danhsachPCHD.add(s);
             }
         } catch (SQLException ex) {
-            Logger.getLogger(InfoTeacher.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(InfoTeacher2.class.getName()).log(Level.SEVERE, null, ex);
         }
         return danhsachPCHD;
     }
@@ -364,6 +364,7 @@ public class InfoAssignmentForClass extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(phanCongTable);
 
+        xemChiTietPhanCongBtn.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         xemChiTietPhanCongBtn.setText("Xem chi tiết phân công");
         xemChiTietPhanCongBtn.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

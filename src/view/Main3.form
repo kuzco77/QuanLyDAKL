@@ -335,7 +335,6 @@
                                           <Component id="thongTinMENU2" min="-2" pref="184" max="-2" attributes="0"/>
                                           <Component id="quanLyMENU" min="-2" pref="178" max="-2" attributes="0"/>
                                       </Group>
-                                      <EmptySpace pref="196" max="32767" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
                                       <Component id="taiKhoanMENU" min="-2" pref="170" max="-2" attributes="0"/>
@@ -343,9 +342,9 @@
                                       <Component id="timKiemMENU" min="-2" pref="170" max="-2" attributes="0"/>
                                       <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                       <Component id="caiDatMENU" min="-2" pref="170" max="-2" attributes="0"/>
-                                      <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
+                              <EmptySpace pref="196" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                     </DimensionLayout>
@@ -763,6 +762,10 @@
                       <Properties>
                         <Property name="text" type="java.lang.String" value="T&#xec;m ki&#x1ebf;m ph&#xe2;n c&#xf4;ng"/>
                       </Properties>
+                      <Events>
+                        <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="jButton3MouseClicked"/>
+                        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="jButton3ActionPerformed"/>
+                      </Events>
                     </Component>
                     <Component class="javax.swing.JButton" name="jButton4">
                       <Properties>

@@ -38,16 +38,17 @@ public class KeKhaiFrame extends javax.swing.JFrame {
      */
     private String maGiangVien = "";
     
-    public KeKhaiFrame(String maGiangVien) {
+    public KeKhaiFrame(String maGiangVien, String tenGiangVien) {
         initComponents();
         setLocationRelativeTo(null);
         setTitle("Phân công đồ án- khối lượng môn học cho lớp");
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/drawable/blue_library.png")));
         setDefaultCloseOperation(DISPOSE_ON_CLOSE);
-        this.maGiangVien = maGiangVien;
-        if (maGiangVien.equalsIgnoreCase("admin")) {
+        
+        if (maGiangVien.equalsIgnoreCase("admin")) {           
            fillComboBox();
-           this.maGiangVien = "";
+        } else {
+            tenGiangVienCb.addItem(tenGiangVien);
         }
         
         updateTable("");
@@ -233,7 +234,7 @@ public class KeKhaiFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
     
     private void capNhatBtnActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_capNhatBtnActionPerformed
-        updateTable("");
+        updateTable(maGiangVien);
     }//GEN-LAST:event_capNhatBtnActionPerformed
     
     private void tenGiangVienCbActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_tenGiangVienCbActionPerformed
@@ -278,7 +279,7 @@ public class KeKhaiFrame extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new KeKhaiFrame("").setVisible(true);
+                new KeKhaiFrame("admin", "").setVisible(true);
             }
         });
     }
@@ -294,14 +295,14 @@ public class KeKhaiFrame extends javax.swing.JFrame {
 //                maGiangVien = "GV00" + indexPath;
 //            }
             
-            String url = covertStringToURL(tenGiangVienCb.getSelectedItem().toString());
+//            String url = covertStringToURL(tenGiangVienCb.getSelectedItem().toString());
             
             String blankQuery = "call keKhaiPhanCongHuongDan('%s','%s','%s','%s')";
             String sqlQuery = String.format(blankQuery,
                     maGiangVien,
                     tuKyCB.getSelectedItem().toString(),
                     denKyCb.getSelectedItem().toString(),
-                    url
+                    tenGiangVienCb.getSelectedItem().toString()
             );
             DefaultTableModel model = ServiceModel.getTableModelFromSQLQuery(sqlQuery, "phan cong huong dan theo giang vien");
             phanCongTable.setModel(model);

@@ -484,7 +484,7 @@ private static final String TEST = "test";
                         .addComponent(timKiemMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(caiDatMENU, javax.swing.GroupLayout.PREFERRED_SIZE, 170, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))))
+                        .addGap(0, 0, 0))))
         );
         theChucNangChinhLayout.setVerticalGroup(
             theChucNangChinhLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -640,6 +640,16 @@ private static final String TEST = "test";
         });
 
         jButton3.setText("Tìm kiếm phân công");
+        jButton3.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jButton3MouseClicked(evt);
+            }
+        });
+        jButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton3ActionPerformed(evt);
+            }
+        });
 
         jButton4.setText("Tìm kiếm giảng viên");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -1191,7 +1201,7 @@ private static final String TEST = "test";
     }//GEN-LAST:event_jLabel7MouseClicked
 
     private void phanCongMENUMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_phanCongMENUMouseClicked
-        KeKhaiFrame frame = new KeKhaiFrame(maNguoiDung);
+        KeKhaiFrame frame = new KeKhaiFrame(maNguoiDung, tenNguoiDungTF.getText());
         frame.setVisible(true);
     }//GEN-LAST:event_phanCongMENUMouseClicked
 
@@ -1204,6 +1214,15 @@ private static final String TEST = "test";
         InfoAssignmentForClass frame = new InfoAssignmentForClass(maNguoiDung);
         frame.setVisible(true);
     }//GEN-LAST:event_thongTinMENU2MouseClicked
+
+    private void jButton3MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton3MouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton3MouseClicked
+
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        SearchInfoAssignmentForClass frame = new SearchInfoAssignmentForClass();
+        frame.setVisible(true);
+    }//GEN-LAST:event_jButton3ActionPerformed
     private void dangXuat() {
 //        this.dispose();
 //        main.login.setVisible(true);
